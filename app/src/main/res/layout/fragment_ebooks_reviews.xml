@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Regular
+        android:id="@+id/count_reading_book"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="3492"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/person"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="3dp"
+        android:src="@drawable/ic_person_black_24dp"
+        app:layout_constraintBottom_toBottomOf="@id/count_reading_book"
+        app:layout_constraintLeft_toRightOf="@id/count_reading_book" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="Comments"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/person"
+        app:layout_constraintLeft_toRightOf="@id/person" />
+
+    <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Regular
+        android:id="@+id/book_rating_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:text="5.0"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/person"
+        app:layout_constraintRight_toLeftOf="@id/book_rating" />
+
+    <RatingBar
+        android:id="@+id/book_rating"
+        style="?ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="2dp"
+        android:rating="5"
+        android:theme="@style/RatingBar"
+        app:layout_constraintBottom_toBottomOf="@id/person"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <View
+        android:id="@+id/bottom_line"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/count_reading_book"
+        style="@style/proifleDetailsView" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottom_line">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Reviews"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_2"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chose Rating"/>
+
+                <SeekBar
+                    android:id="@+id/seekBarScore"
+                    android:layout_toRightOf="@id/tv_2"
+                    android:layout_toLeftOf="@id/tv_score"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:progress="0"
+                    android:max="50"
+                    android:progressBackgroundTint="@color/black"
+                    android:progressTint="@color/black"
+                    android:secondaryProgressTint="@color/black"
+                    android:thumbTint="#ffdf74" />
+
+                <TextView
+                    android:id="@+id/tv_score"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="0.0"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/user_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_toLeftOf="@id/send_comment"
+                    android:hint="Say something..."
+                    android:background="@drawable/bg_comment_dialog"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="20dp"
+                    android:paddingLeft="20dp"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:id="@+id/send_comment"
+                    android:layout_width="30dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@id/user_comment"
+                    android:layout_alignBottom="@id/user_comment"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/ic_send_black_24dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerComments"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.constraint.ConstraintLayout>

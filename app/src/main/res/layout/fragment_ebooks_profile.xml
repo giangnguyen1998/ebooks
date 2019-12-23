@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/profileBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/profile_bk"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/white"
+                    android:text="Update Avatar"/>
+
+                <ImageView
+                    android:id="@+id/camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_camera_alt_black_24dp" />
+
+            </LinearLayout>
+
+            <com.github.siyamed.shapeimageview.CircularImageView
+                android:id="@+id/imageUser"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/profile3" />
+
+            <TextView
+                android:id="@+id/fullNameUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="..."
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/usernameUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="..."
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="20dp"
+                android:background="@color/profileBackground"
+                android:gravity="center">
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/headerText1"
+                android:layout_marginBottom="20dp"
+                android:text="Book Marks" />
+
+            <RelativeLayout style="@style/profileDetailsLayout">
+
+                <ImageView
+                    android:id="@+id/now_reading"
+                    style="@style/profileDetailsImage"
+                    android:src="@drawable/ic_bookmark_custom" />
+
+                <TextView
+                    android:id="@+id/nameNowReading"
+                    style="@style/profileDetailsTextMain"
+                    android:layout_toRightOf="@id/now_reading"
+                    android:text="Now Reading" />
+
+                <TextView
+                    style="@style/profileDetailsMiniText"
+                    android:layout_toRightOf="@id/now_reading"
+                    android:text="11 books" />
+
+            </RelativeLayout>
+
+            <View style="@style/proifleDetailsView" />
+
+            <RelativeLayout style="@style/profileDetailsLayout">
+
+                <ImageView
+                    android:id="@+id/finished"
+                    style="@style/profileDetailsImage"
+                    android:src="@drawable/ic_flag_black_24dp" />
+
+                <TextView
+                    android:id="@+id/nameFinished"
+                    style="@style/profileDetailsTextMain"
+                    android:layout_toRightOf="@id/finished"
+                    android:text="Finished" />
+
+                <TextView
+                    style="@style/profileDetailsMiniText"
+                    android:layout_toRightOf="@id/finished"
+                    android:text="4 books" />
+
+            </RelativeLayout>
+
+            <View style="@style/proifleDetailsView" />
+
+            <RelativeLayout style="@style/profileDetailsLayout">
+
+                <ImageView
+                    android:id="@+id/allBooks"
+                    style="@style/profileDetailsImage"
+                    android:src="@drawable/ic_local_library_black_24dp" />
+
+                <TextView
+                    android:id="@+id/nameAllBooks"
+                    style="@style/profileDetailsTextMain"
+                    android:layout_toRightOf="@id/allBooks"
+                    android:text="All My Books" />
+
+                <TextView
+                    style="@style/profileDetailsMiniText"
+                    android:layout_toRightOf="@id/allBooks"
+                    android:text="15 books" />
+
+            </RelativeLayout>
+
+            <TextView
+                style="@style/headerText1"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="Account Info" />
+
+            <RelativeLayout style="@style/profileDetailsLayout">
+
+                <ImageView
+                    android:id="@+id/nameImageView"
+                    style="@style/profileDetailsImage"
+                    android:src="@drawable/ic_person_black_24dp" />
+
+                <TextView
+                    android:id="@+id/nameTextView"
+                    style="@style/profileDetailsTextMain"
+                    android:layout_toRightOf="@id/nameImageView"
+                    android:text="Name" />
+
+                <TextView
+                    android:id="@+id/fullName"
+                    style="@style/profileDetailsMiniText"
+                    android:layout_toRightOf="@id/nameImageView"
+                    android:text="..." />
+
+            </RelativeLayout>
+
+            <View style="@style/proifleDetailsView" />
+
+            <RelativeLayout style="@style/profileDetailsLayout">
+
+                <ImageView
+                    android:id="@+id/mobileImageView"
+                    style="@style/profileDetailsImage"
+                    android:src="@drawable/ic_contact_phone_black_24dp" />
+
+                <TextView
+                    style="@style/profileDetailsTextMain"
+                    android:layout_toRightOf="@id/mobileImageView"
+                    android:text="Mobile" />
+
+                <TextView
+                    android:id="@+id/phoneNumber"
+                    style="@style/profileDetailsMiniText"
+                    android:layout_toRightOf="@id/mobileImageView"
+                    android:text="..." />
+
+            </RelativeLayout>
+
+            <View style="@style/proifleDetailsView" />
+
+            <RelativeLayout style="@style/profileDetailsLayout">
+
+                <ImageView
+                    android:id="@+id/emailImageView"
+                    style="@style/profileDetailsImage"
+                    android:src="@drawable/ic_contact_mail_black_24dp" />
+
+                <TextView
+                    style="@style/profileDetailsTextMain"
+                    android:layout_toRightOf="@id/emailImageView"
+                    android:text="Email" />
+
+                <TextView
+                    android:id="@+id/email"
+                    style="@style/profileDetailsMiniText"
+                    android:layout_toRightOf="@id/emailImageView"
+                    android:text="..." />
+
+            </RelativeLayout>
+
+            <View style="@style/proifleDetailsView" />
+
+            <RelativeLayout
+                android:id="@+id/logout"
+                style="@style/profileDetailsLayout"
+                android:layout_marginBottom="20dp">
+
+                <ImageView
+                    android:id="@+id/logoutImageView"
+                    style="@style/profileDetailsImage"
+                    android:src="@drawable/ic_power_settings_new_black_24dp" />
+
+                <TextView
+                    style="@style/profileDetailsTextMain"
+                    android:layout_alignTop="@id/logoutImageView"
+                    android:layout_alignBottom="@id/logoutImageView"
+                    android:layout_toRightOf="@id/logoutImageView"
+                    android:gravity="center_vertical"
+                    android:text="Log out" />
+
+            </RelativeLayout>
+
+            <View style="@style/proifleDetailsView" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

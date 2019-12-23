@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical"
+    tools:context=".activities.home.EBookFragment">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.smarteist.autoimageslider.SliderView
+                android:id="@+id/imageSlider"
+                android:layout_width="match_parent"
+                android:layout_height="188dp"
+                app:sliderAnimationDuration="1000"
+                app:sliderAutoCycleDirection="back_and_forth"
+                app:sliderAutoCycleEnabled="true"
+                app:sliderCircularHandlerEnabled="true"
+                app:sliderIndicatorAnimationDuration="1000"
+                app:sliderIndicatorGravity="center_horizontal|bottom"
+                app:sliderIndicatorMargin="15dp"
+                app:sliderIndicatorOrientation="horizontal"
+                app:sliderIndicatorPadding="3dp"
+                app:sliderIndicatorRadius="2dp"
+                app:sliderIndicatorSelectedColor="#5A5A5A"
+                app:sliderIndicatorUnselectedColor="#FFF"
+                app:sliderScrollTimeInSec="3"
+                app:sliderStartAutoCycle="true" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="22dp"
+                android:paddingTop="22.7dp"
+                android:paddingRight="31dp">
+
+                <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Bold
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Books categories"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Bold
+                    android:id="@+id/viewAllBooks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View All"
+                    android:textColor="@color/geryText2"
+                    android:textSize="11.7sp" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewPagerBook"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:clipToPadding="false"
+                    android:foregroundGravity="center"
+                    android:overScrollMode="never" />
+
+                <include
+                    android:id="@+id/shimmerPagerBooks"
+                    layout="@layout/shimmer_pager_books"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingLeft="22dp"
+                android:paddingRight="31dp">
+
+                <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Bold
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Best Authors"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Bold
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View All"
+                    android:textColor="@color/geryText2"
+                    android:textSize="11.7sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18.3dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="176dp"
+                        android:layout_height="176dp"
+                        android:layout_marginRight="2.5dp"
+                        android:background="@drawable/profile1">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="13dp"
+                            android:layout_marginTop="125dp"
+                            android:orientation="vertical">
+
+                            <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Bold
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Jennord Roers"
+                                android:textColor="@color/white"
+                                android:textSize="14.7sp" />
+
+                            <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Medium
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="43 Books Published"
+                                android:textColor="#bcffffff"
+                                android:textSize="11.3sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="176dp"
+                        android:layout_height="176dp"
+                        android:background="@color/black">
+
+                        <LinearLayout
+                            android:layout_width="176dp"
+                            android:layout_height="176dp"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/profile4">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="13dp"
+                                android:layout_marginTop="125dp"
+                                android:orientation="vertical">
+
+                                <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Bold
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Jennord Roers"
+                                    android:textColor="@color/white"
+                                    android:textSize="14.7sp" />
+
+                                <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Medium
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="43 Books Published"
+                                    android:textColor="#bcffffff"
+                                    android:textSize="11.3sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2.5dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="176dp"
+                        android:layout_height="176dp"
+                        android:layout_marginRight="2.5dp"
+                        android:background="@drawable/profile2">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="13dp"
+                            android:layout_marginTop="125dp"
+                            android:orientation="vertical">
+
+                            <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Bold
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Jennord Roers"
+                                android:textColor="@color/white"
+                                android:textSize="14.7sp" />
+
+                            <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Medium
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="43 Books Published"
+                                android:textColor="#bcffffff"
+                                android:textSize="11.3sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="176dp"
+                        android:layout_height="176dp"
+                        android:background="@color/black">
+
+                        <LinearLayout
+                            android:layout_width="176dp"
+                            android:layout_height="176dp"
+                            android:layout_marginRight="6dp"
+                            android:background="@drawable/profile3">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="13dp"
+                                android:layout_marginTop="125dp"
+                                android:orientation="vertical">
+
+                                <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Bold
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Jennord Roers"
+                                    android:textColor="@color/white"
+                                    android:textSize="14.7sp" />
+
+                                <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Medium
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="43 Books Published"
+                                    android:textColor="#bcffffff"
+                                    android:textSize="11.3sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

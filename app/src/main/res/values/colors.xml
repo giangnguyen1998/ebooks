@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#50289a</color>
+    <color name="colorPrimaryDark">#50289a</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="toolbarColor">#673bb8</color>
+    <color name="white">#ffffff</color>
+    <color name="darkPurple">#50289a</color>
+    <color name="transperentColor">#00000000</color>
+    <color name="hintColor">#8b000000</color>
+    <color name="black">#000000</color>
+    <color name="greyText">#29000000</color>
+    <color name="geryText2">#93000000</color>
+    <color name="greyText3">#969696</color>
+    <color name="viewlineColor">#dedede</color>
+    <color name="readBookBg">#303030</color>
+    <color name="gerytxtcolor4">#cdd6d9</color>
+    <color name="toolbar3Color">#202020</color>
+    <color name="transparent">#00000000</color>
+    <color name="circleColor">#ff5521</color>
+    <color name="yellow">#ffdf74</color>
+    <color name="background">#f5f5f5</color>
+    <color name="pdfBackground">#F7F7F7</color>
+    <color name="shimmerCollectionsBackground">#0C000000</color>
+    <color name="colorBackground">#F4F7F7</color>
+    <color name="colorButtonRead">#03A9F4</color>
+    <color name="colorButtonReadContinues">#6CB642</color>
+    <color name="loginBkColor">#f0f0f0</color>
+    <color name="primaryTextColor">#00a5ff</color>
+    <!--colros for card-->
+    <color name="whiteCardColor">#fff</color>
+    <!--colors for profile-->
+    <color name="profilePrimaryDark">#FF3B30</color>
+    <color name="profileAccentColor">#F7F7F7</color>
+    <color name="whiteTextColor">#fff</color>
+    <color name="profileBackground">#fff</color>
+    <color name="blackTextColor">#000</color>
+    <color name="profileEditTextColor">#707070</color>
+</resources>

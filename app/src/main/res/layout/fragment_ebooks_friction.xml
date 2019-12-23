@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical">
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="23.3dp"
+                android:paddingTop="25dp"
+                android:paddingRight="23.3dp">
+
+                <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Medium
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Related Books"
+                    android:textColor="@color/black"
+                    android:textSize="15.7sp" />
+
+                <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Medium
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MORE"
+                    android:textColor="@color/toolbarColor"
+                    android:textSize="13.3sp" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewPagerBookRelatedCategory"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:clipToPadding="false"
+                    android:foregroundGravity="center"
+                    android:overScrollMode="never" />
+
+                <include
+                    android:id="@+id/shimmerPagerBooksCategory"
+                    layout="@layout/shimmer_pager_books"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="23.3dp"
+                android:paddingTop="25dp"
+                android:paddingRight="23.3dp">
+
+                <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Medium
+                    android:id="@+id/relatedBookAuthor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Writers"
+                    android:textColor="@color/black"
+                    android:textSize="15.7sp" />
+
+                <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Medium
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MORE"
+                    android:textColor="@color/toolbarColor"
+                    android:textSize="13.3sp" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewPagerBookRelatedAuthor"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:clipToPadding="false"
+                    android:foregroundGravity="center"
+                    android:overScrollMode="never" />
+
+                <include
+                    android:id="@+id/shimmerPagerBooksAuthor"
+                    layout="@layout/shimmer_pager_books"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+</LinearLayout>

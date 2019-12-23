@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigationBooks"
+        android:icon="@drawable/books"
+        android:title="Books" />
+
+    <item
+        android:id="@+id/navigationAuthor"
+        android:icon="@drawable/author"
+        android:title="Authors" />
+
+    <item
+        android:id="@+id/navigationCollection"
+        android:icon="@drawable/collection"
+        android:title="Collections" />
+
+    <item
+        android:id="@+id/navigationFavorite"
+        android:icon="@drawable/favourite"
+        android:title="Profile" />
+
+</menu>

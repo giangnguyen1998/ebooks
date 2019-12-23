@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<!--    <item-->
+<!--        android:id="@+id/comment"-->
+<!--        android:icon="@drawable/ic_mode_comment_white"-->
+<!--        android:title="comment"-->
+<!--        app:showAsAction="collapseActionView|ifRoom" />-->
+
+<!--    <item-->
+<!--        android:id="@+id/gotoPage"-->
+<!--        android:icon="@drawable/ic_swap_horiz_white"-->
+<!--        android:title="page"-->
+<!--        app:showAsAction="collapseActionView|ifRoom" />-->
+
+    <item
+        android:id="@+id/fullScreen"
+        android:icon="@drawable/ic_zoom_out_map_white"
+        android:title="zoom"
+        app:showAsAction="collapseActionView|ifRoom" />
+
+</menu>

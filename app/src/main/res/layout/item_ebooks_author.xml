@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp"
+    app:cardElevation="1dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="236dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:transitionName="authorImageTransition"
+            android:id="@+id/item_author_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="13dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
+            <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Bold
+                android:id="@+id/item_author_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jennord Roers"
+                android:textColor="@color/white"
+                android:textSize="14.7sp" />
+
+            <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Medium
+                android:id="@+id/item_author_totalBooks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="43 Books Published"
+                android:textColor="#bcffffff"
+                android:textSize="11.3sp" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

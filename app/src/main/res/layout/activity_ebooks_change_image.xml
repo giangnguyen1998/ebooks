@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <include
+        layout="@layout/toolbar_avatar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="150dp"
+        android:alpha="0.8"
+        android:background="@color/toolbarColor"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.github.siyamed.shapeimageview.CircularImageView
+        android:id="@+id/imageUser"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/profile3"
+        app:layout_constraintBottom_toBottomOf="@id/view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view" />
+
+    <RelativeLayout
+        android:id="@+id/choseImage"
+        style="@style/profileDetailsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <View
+            android:id="@+id/bottom_line"
+            style="@style/proifleDetailsView" />
+
+        <ImageView
+            android:id="@+id/photo_library"
+            style="@style/profileDetailsImage"
+            android:layout_below="@id/bottom_line"
+            android:layout_margin="15dp"
+            android:src="@drawable/ic_photo_library_black_24dp" />
+
+        <TextView
+            android:id="@+id/nameFinished"
+            style="@style/profileDetailsTextMain"
+            android:layout_alignTop="@id/photo_library"
+            android:layout_alignBottom="@id/photo_library"
+            android:layout_toRightOf="@id/photo_library"
+            android:gravity="center"
+            android:text="Chose image" />
+
+    </RelativeLayout>
+
+
+</android.support.constraint.ConstraintLayout>
