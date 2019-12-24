@@ -11,7 +11,7 @@ import edu.nuce.giang.ebooks.api.EBookClient;
 import edu.nuce.giang.ebooks.base.SharedPrefs;
 
 public class Utils {
-    public static final String URL = "http://192.168.1.35:3000/";
+    public static final String URL = "http://192.168.1.9:3000/";
 
     public static EBookApi getEBookApiInstance() {
         return EBookClient.getEBookClient().create(EBookApi.class);
