@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -18,6 +19,7 @@ import edu.nuce.giang.ebooks.R;
 import edu.nuce.giang.ebooks.Utils;
 import edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Regular;
 import edu.nuce.giang.ebooks.models.BookModel;
+import edu.nuce.giang.ebooks.models.LibraryModel;
 
 
 public class BooksListAdapter extends RecyclerView.Adapter<BooksListAdapter.MyViewHolder> {
@@ -40,6 +42,8 @@ public class BooksListAdapter extends RecyclerView.Adapter<BooksListAdapter.MyVi
         MyTextView_Roboto_Regular itemBookListName;
         @BindView(R.id.item_bookList_author)
         MyTextView_Roboto_Regular itemBookListAuthor;
+        @BindView(R.id.like_book)
+        ImageView likeBook;
 
         public MyViewHolder(View view) {
             super(view);
@@ -47,7 +51,6 @@ public class BooksListAdapter extends RecyclerView.Adapter<BooksListAdapter.MyVi
             ButterKnife.bind(this, view);
 
             view.setOnClickListener(this);
-
         }
 
         @Override
@@ -82,6 +85,25 @@ public class BooksListAdapter extends RecyclerView.Adapter<BooksListAdapter.MyVi
 
         holder.itemBookListName.setText(books.get(i).getName());
         holder.itemBookListAuthor.setText(books.get(i).getAuthorName());
+        holder.likeBook.setOnClickListener(v -> {
+            try {
+                LibraryModel model = Utils.getDataBaseUtilsInstance(context)
+                        .getBook(books.get(i).getId());
+                if (model == null) {
+                    Utils.getDataBaseUtilsInstance(context)
+                            .addBook(new LibraryModel(
+                                    books.get(i).getId(),
+                                    0,
+                                    0
+                            ));
+                    Toast.makeText(context,"Thêm vào Book Marks Thành Công!",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context,"Sách đã có trong Book Marks!",Toast.LENGTH_SHORT).show();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     @Override

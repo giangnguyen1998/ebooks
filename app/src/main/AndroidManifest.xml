@@ -26,7 +26,7 @@
             android:name=".activities.home.EBookHome2Activity"
             android:theme="@style/MaterialTransitionsTheme" />
         <activity android:name=".activities.CocoBookGerneActivity" />
-        <activity android:name=".activities.CocoBooksLibraryActivity" />
+        <activity android:name=".activities.library.EBookLibraryActivity" />
         <activity
             android:name=".activities.author.EBookAuthorActivity"
             android:fitsSystemWindows="true"

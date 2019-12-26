@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/profileBackground">
 
     <LinearLayout
@@ -95,51 +95,9 @@
                 android:layout_marginBottom="20dp"
                 android:text="Book Marks" />
 
-            <RelativeLayout style="@style/profileDetailsLayout">
-
-                <ImageView
-                    android:id="@+id/now_reading"
-                    style="@style/profileDetailsImage"
-                    android:src="@drawable/ic_bookmark_custom" />
-
-                <TextView
-                    android:id="@+id/nameNowReading"
-                    style="@style/profileDetailsTextMain"
-                    android:layout_toRightOf="@id/now_reading"
-                    android:text="Now Reading" />
-
-                <TextView
-                    style="@style/profileDetailsMiniText"
-                    android:layout_toRightOf="@id/now_reading"
-                    android:text="11 books" />
-
-            </RelativeLayout>
-
-            <View style="@style/proifleDetailsView" />
-
-            <RelativeLayout style="@style/profileDetailsLayout">
-
-                <ImageView
-                    android:id="@+id/finished"
-                    style="@style/profileDetailsImage"
-                    android:src="@drawable/ic_flag_black_24dp" />
-
-                <TextView
-                    android:id="@+id/nameFinished"
-                    style="@style/profileDetailsTextMain"
-                    android:layout_toRightOf="@id/finished"
-                    android:text="Finished" />
-
-                <TextView
-                    style="@style/profileDetailsMiniText"
-                    android:layout_toRightOf="@id/finished"
-                    android:text="4 books" />
-
-            </RelativeLayout>
-
-            <View style="@style/proifleDetailsView" />
-
-            <RelativeLayout style="@style/profileDetailsLayout">
+            <RelativeLayout
+                android:id="@+id/library_books"
+                style="@style/profileDetailsLayout">
 
                 <ImageView
                     android:id="@+id/allBooks"
@@ -251,8 +209,6 @@
                     android:text="Log out" />
 
             </RelativeLayout>
-
-            <View style="@style/proifleDetailsView" />
 
         </LinearLayout>
 

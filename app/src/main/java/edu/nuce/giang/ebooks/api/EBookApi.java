@@ -25,6 +25,9 @@ import retrofit2.http.Query;
 
 public interface EBookApi {
 
+    @GET("books/ids")
+    Call<List<BookModel>> findAllBookByIds(@Query("id") List<Integer> ids);
+
     @GET("comments/{bookId}")
     Call<List<CommentModel>> findCommentsOfBook(@Path("bookId") int bookId);
 

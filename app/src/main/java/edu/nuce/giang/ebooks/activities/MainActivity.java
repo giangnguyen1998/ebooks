@@ -11,6 +11,7 @@ import edu.nuce.giang.ebooks.activities.author.EBookAuthorActivity;
 import edu.nuce.giang.ebooks.activities.category.EBookCatagoriesActivity;
 import edu.nuce.giang.ebooks.activities.detail.EBookFictionActivity;
 import edu.nuce.giang.ebooks.activities.home.EBookHome2Activity;
+import edu.nuce.giang.ebooks.activities.library.EBookLibraryActivity;
 import edu.nuce.giang.ebooks.activities.login.EBookLoginActivity;
 import edu.nuce.giang.ebooks.activities.read.EBooksReadActivity;
 
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         screen5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(MainActivity.this,CocoBooksLibraryActivity.class);
+                Intent intent =new Intent(MainActivity.this, EBookLibraryActivity.class);
                 startActivity(intent);
             }
         });

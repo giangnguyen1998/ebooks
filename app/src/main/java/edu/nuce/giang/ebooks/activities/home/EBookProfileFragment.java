@@ -26,6 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import edu.nuce.giang.ebooks.R;
 import edu.nuce.giang.ebooks.Utils;
+import edu.nuce.giang.ebooks.activities.library.EBookLibraryActivity;
 import edu.nuce.giang.ebooks.activities.photo.StoreImageActivity;
 import edu.nuce.giang.ebooks.activities.login.EBookLoginActivity;
 import edu.nuce.giang.ebooks.base.SharedPrefs;
@@ -49,6 +50,8 @@ public class EBookProfileFragment extends Fragment {
     TextView email;
     @BindView(R.id.logout)
     RelativeLayout logout;
+    @BindView(R.id.library_books)
+    RelativeLayout library;
 
     @Nullable
     @Override
@@ -86,6 +89,11 @@ public class EBookProfileFragment extends Fragment {
         camera.setOnClickListener(v -> {
             startActivity(new Intent(
                     getContext(), StoreImageActivity.class
+            ));
+        });
+        library.setOnClickListener(v -> {
+            startActivity(new Intent(
+                    getContext(), EBookLibraryActivity.class
             ));
         });
     }

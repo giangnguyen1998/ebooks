@@ -7,6 +7,7 @@ import java.util.List;
 import edu.nuce.giang.ebooks.Utils;
 import edu.nuce.giang.ebooks.models.BookModel;
 import edu.nuce.giang.ebooks.presenters.BookPresenter;
+import edu.nuce.giang.ebooks.views.BookLibraryView;
 import edu.nuce.giang.ebooks.views.BookView;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -15,6 +16,11 @@ import retrofit2.Response;
 public class IBookPresenter implements BookPresenter {
 
     private BookView view;
+    private BookLibraryView libraryView;
+
+    public IBookPresenter(BookLibraryView libraryView) {
+        this.libraryView = libraryView;
+    }
 
     public IBookPresenter(BookView view) {
         this.view = view;
@@ -135,6 +141,29 @@ public class IBookPresenter implements BookPresenter {
                     public void onFailure(@NonNull Call<List<BookModel>> call, @NonNull Throwable t) {
                         view.hideLoadingData();
                         view.onError(t.getLocalizedMessage());
+                    }
+                });
+    }
+
+    @Override
+    public void getBooksByIds(List<Integer> ids) {
+        libraryView.loadingData();
+        Utils.getEBookApiInstance()
+                .findAllBookByIds(ids)
+                .enqueue(new Callback<List<BookModel>>() {
+                    @Override
+                    public void onResponse(@NonNull Call<List<BookModel>> call,
+                                           @NonNull Response<List<BookModel>> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            libraryView.hideLoadingData();
+                            libraryView.setListData(response.body());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<List<BookModel>> call,@NonNull Throwable t) {
+                        libraryView.hideLoadingData();
+                        libraryView.onError(t.getLocalizedMessage());
                     }
                 });
     }

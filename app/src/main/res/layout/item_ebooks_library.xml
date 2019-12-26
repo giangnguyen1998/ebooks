@@ -1,0 +1,77 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp">
+
+        <RelativeLayout
+            android:id="@+id/layout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="1dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/bookImage1"
+                    android:layout_width="match_parent"
+                    android:layout_height="245dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/tony" />
+
+                <edu.nuce.giang.ebooks.customfonts.TextViewSFProDisplaySemibold
+                    android:id="@+id/bookName1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="10.7dp"
+                    android:layout_marginRight="8dp"
+                    android:text="Hugo Huesca Dungeon Lord"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Medium
+                    android:id="@+id/authorName1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="11dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="12dp"
+                    android:text="M Methew"
+                    android:textColor="#69000000"
+                    android:textSize="12.3sp" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/backPageToPages"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginLeft="27dp"
+                android:layout_marginRight="27dp"
+                android:layout_marginTop="204dp"
+                android:background="@drawable/frame_rect">
+
+                <edu.nuce.giang.ebooks.customfonts.TextViewSFProDisplaySemibold
+                    android:id="@+id/pageToPages"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="242/460 Pages"
+                    android:textColor="#e5000000"
+                    android:textSize="11.3dp" />
+            </FrameLayout>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</FrameLayout>

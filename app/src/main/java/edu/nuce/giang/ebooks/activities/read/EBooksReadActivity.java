@@ -33,6 +33,7 @@ import edu.nuce.giang.ebooks.Utils;
 import edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Regular;
 import edu.nuce.giang.ebooks.dialogs.ShareBottomDialog;
 import edu.nuce.giang.ebooks.models.BookModel;
+import edu.nuce.giang.ebooks.models.LibraryModel;
 import edu.nuce.giang.ebooks.presenters.BookPresenter;
 import edu.nuce.giang.ebooks.presenters.impl.IBookPresenter;
 import edu.nuce.giang.ebooks.views.BookView;
@@ -54,6 +55,8 @@ public class EBooksReadActivity extends AppCompatActivity implements BookView {
     LinearLayout layout;
 
     private int currentPage = 0;
+    private int totalPages = 0;
+    private int bookId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,12 +102,27 @@ public class EBooksReadActivity extends AppCompatActivity implements BookView {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                try {
+                    LibraryModel model = Utils.getDataBaseUtilsInstance(getApplicationContext())
+                            .getBook(bookId);
+                    if (model != null) {
+                        if (currentPage >= model.getPageCurrent()) {
+                            if (bookId != 0) {
+                                Utils.getDataBaseUtilsInstance(getApplicationContext())
+                                        .updateNote(new LibraryModel(
+                                                model.getId(),
+                                                bookId,
+                                                currentPage,
+                                                totalPages
+                                        ));
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 onBackPressed();
                 return true;
-//            case R.id.comment:
-//                ShareBottomDialog dialog = new ShareBottomDialog(EBooksReadActivity.this);
-//                dialog.show(getSupportFragmentManager());
-//                return true;
             case R.id.fullScreen:
                 showToolbar(false);
                 return true;
@@ -147,6 +165,7 @@ public class EBooksReadActivity extends AppCompatActivity implements BookView {
 
     @Override
     public void setData(BookModel model) {
+        bookId = model.getId();
         toolbarTitle.setText(model.getName());
         FileLoader.with(this)
                 .load(Utils.URL + model.getUrlContent(),
@@ -166,6 +185,7 @@ public class EBooksReadActivity extends AppCompatActivity implements BookView {
                                     String pageToPages = page + 1 + " of " + pageCount;
                                     pagePerPages.setText(pageToPages);
                                     currentPage = page;
+                                    totalPages = pageCount;
                                     seekBar.setProgress(page, true);
                                 })
                                 .onTap(event -> {

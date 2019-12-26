@@ -1,254 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="12dp"
-    android:background="@color/white"
+    android:background="@color/background"
     android:elevation="1dp"
     android:orientation="vertical">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fillViewport="true"
         android:scrollbars="none">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp">
+            android:layout_height="wrap_content">
 
-
-            <LinearLayout
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerLibrary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:scrollbars="none"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal">
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:visibility="gone"
+                android:layout_marginTop="20dp" />
 
-                    <android.support.v7.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp">
-
-                        <RelativeLayout
-                            android:id="@+id/layout1"
-                            android:layout_width="165.7dp"
-                            android:layout_height="wrap_content"
-                            android:elevation="1dp"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:id="@+id/bookImage1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="245dp"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/tony" />
-
-                                <edu.nuce.giang.ebooks.customfonts.TextViewSFProDisplaySemibold
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_horizontal"
-                                    android:layout_marginLeft="8dp"
-                                    android:layout_marginTop="10.7dp"
-                                    android:layout_marginRight="8dp"
-                                    android:text="Hugo Huesca Dungeon Lord"
-                                    android:textColor="@color/black"
-                                    android:textSize="14sp" />
-
-                                <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Medium
-                                    android:id="@+id/authorName"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="11dp"
-                                    android:layout_marginTop="10dp"
-                                    android:layout_marginBottom="12dp"
-                                    android:text="M Methew"
-                                    android:textColor="#69000000"
-                                    android:textSize="12.3sp" />
-                            </LinearLayout>
-
-                            <FrameLayout
-                                android:layout_width="109.3dp"
-                                android:layout_height="25dp"
-                                android:layout_marginLeft="27dp"
-                                android:layout_marginTop="204dp"
-                                android:background="@drawable/frame_rect">
-
-                                <edu.nuce.giang.ebooks.customfonts.TextViewSFProDisplaySemibold
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:text="242/460 Pages"
-                                    android:textColor="#e5000000"
-                                    android:textSize="11.3dp" />
-                            </FrameLayout>
-                        </RelativeLayout>
-                    </android.support.v7.widget.CardView>
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp">
-
-                        <RelativeLayout
-                            android:layout_width="165.7dp"
-                            android:layout_height="wrap_content"
-                            android:layout_alignRight="@+id/layout1"
-                            android:elevation="1dp"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:id="@+id/bookImage"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="245dp"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/dutch" />
-
-                                <edu.nuce.giang.ebooks.customfonts.TextViewSFProDisplaySemibold
-                                    android:id="@+id/bookName"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_horizontal"
-                                    android:layout_marginLeft="8dp"
-                                    android:layout_marginTop="10.7dp"
-                                    android:layout_marginRight="8dp"
-                                    android:text="Hugo Huesca Dungeon Lord"
-                                    android:textColor="@color/black"
-                                    android:textSize="14sp" />
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-                                    <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Medium
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="11dp"
-                                        android:layout_marginTop="10dp"
-                                        android:layout_marginBottom="12dp"
-                                        android:layout_weight="1"
-                                        android:text="M Methew"
-                                        android:textColor="#69000000"
-                                        android:textSize="12.3sp" />
-
-                                    <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Medium
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="10dp"
-                                        android:layout_marginRight="9dp"
-                                        android:fontFamily="sans-serif-medium"
-                                        android:lineSpacingExtra="2sp"
-                                        android:text="580 Pages"
-                                        android:textColor="#ba000000"
-                                        android:textSize="10.7sp"
-                                        android:textStyle="normal" />
-                                </LinearLayout>
-                            </LinearLayout>
-
-                            <FrameLayout
-                                android:layout_width="109.3dp"
-                                android:layout_height="25dp"
-                                android:layout_marginLeft="27dp"
-                                android:layout_marginTop="204dp"
-                                android:background="@drawable/frame_rect">
-
-                                <edu.nuce.giang.ebooks.customfonts.TextViewSFProDisplaySemibold
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:text="242/460 Pages"
-                                    android:textColor="#e5000000"
-                                    android:textSize="11.3dp" />
-                            </FrameLayout>
-                        </RelativeLayout>
-                    </android.support.v7.widget.CardView>
-                </LinearLayout>
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="10dp">
-
-                    <RelativeLayout
-                        android:layout_width="165.7dp"
-                        android:layout_height="wrap_content"
-                        android:elevation="1dp"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="245dp"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/depths" />
-
-                            <edu.nuce.giang.ebooks.customfonts.TextViewSFProDisplaySemibold
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_marginLeft="8dp"
-                                android:layout_marginTop="10.7dp"
-                                android:layout_marginRight="8dp"
-                                android:text="Hugo Huesca Dungeon Lord"
-                                android:textColor="@color/black"
-                                android:textSize="14sp" />
-
-
-                            <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Medium
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="11dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginBottom="12dp"
-                                android:text="M Methew"
-                                android:textColor="#69000000"
-                                android:textSize="12.3sp" />
-                        </LinearLayout>
-
-                        <FrameLayout
-                            android:layout_width="109.3dp"
-                            android:layout_height="25dp"
-                            android:layout_marginLeft="27dp"
-                            android:layout_marginTop="204dp"
-                            android:layout_marginBottom="20dp"
-                            android:background="@drawable/frame_rect">
-
-                            <edu.nuce.giang.ebooks.customfonts.TextViewSFProDisplaySemibold
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="242/460 Pages"
-                                android:textColor="#e5000000"
-                                android:textSize="11.3dp" />
-                        </FrameLayout>
-                    </RelativeLayout>
-                </android.support.v7.widget.CardView>
-            </LinearLayout>
+            <TextView
+                android:id="@+id/nothingBook"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Nothing Books in Library"
+                android:textSize="25sp"
+                android:textStyle="bold"/>
 
         </RelativeLayout>
-    </android.support.v4.widget.NestedScrollView>
 
+    </android.support.v4.widget.NestedScrollView>
 
 </RelativeLayout>

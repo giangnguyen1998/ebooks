@@ -9,9 +9,18 @@ import edu.nuce.giang.ebooks.activities.login.EBookLoginActivity;
 import edu.nuce.giang.ebooks.api.EBookApi;
 import edu.nuce.giang.ebooks.api.EBookClient;
 import edu.nuce.giang.ebooks.base.SharedPrefs;
+import edu.nuce.giang.ebooks.repositories.DataBaseUtils;
 
 public class Utils {
-    public static final String URL = "http://192.168.1.9:3000/";
+    public static final String URL = "http://192.168.1.35:3000/";
+    private static DataBaseUtils dataBaseUtils = null;
+
+    public static DataBaseUtils getDataBaseUtilsInstance(Context context) {
+        if (dataBaseUtils == null) {
+            dataBaseUtils = new DataBaseUtils(context);
+        }
+        return dataBaseUtils;
+    }
 
     public static EBookApi getEBookApiInstance() {
         return EBookClient.getEBookClient().create(EBookApi.class);
