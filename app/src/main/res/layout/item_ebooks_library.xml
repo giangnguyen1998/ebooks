@@ -16,7 +16,7 @@
             android:elevation="1dp"
             android:orientation="horizontal">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -30,9 +30,11 @@
 
                 <edu.nuce.giang.ebooks.customfonts.TextViewSFProDisplaySemibold
                     android:id="@+id/bookName1"
+                    android:layout_toLeftOf="@id/book_delete"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@id/bookImage1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="10.7dp"
                     android:layout_marginRight="8dp"
@@ -42,6 +44,9 @@
 
                 <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Medium
                     android:id="@+id/authorName1"
+                    android:layout_alignParentLeft="true"
+                    android:layout_toLeftOf="@id/book_delete"
+                    android:layout_below="@id/bookName1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="11dp"
@@ -50,7 +55,18 @@
                     android:text="M Methew"
                     android:textColor="#69000000"
                     android:textSize="12.3sp" />
-            </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/book_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@id/bookName1"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_delete_black_24dp" />
+            </RelativeLayout>
 
             <FrameLayout
                 android:id="@+id/backPageToPages"

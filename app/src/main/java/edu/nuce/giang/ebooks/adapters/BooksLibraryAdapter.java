@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -27,7 +28,6 @@ public class BooksLibraryAdapter extends RecyclerView.Adapter<BooksLibraryAdapte
 
     private Context context;
     private List<BookModel> models;
-    private List<LibraryModel> libraryModels;
     private int value;
     private OnBookLibraryClickListener listener;
 
@@ -66,12 +66,21 @@ public class BooksLibraryAdapter extends RecyclerView.Adapter<BooksLibraryAdapte
             LibraryModel model = null;
             try {
                 model = Utils.getDataBaseUtilsInstance(context).getBook(models.get(i).getId());
+                assert model != null;
+                libraryViewHolder.pageToPages.setText(model.getPageCurrent() + "/" + model.getFinishBook());
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            assert model != null;
-            libraryViewHolder.pageToPages.setText(model.getPageCurrent() + "/" + model.getFinishBook());
         }
+        libraryViewHolder.bookDelete.setOnClickListener(v -> {
+            try {
+                LibraryModel model = Utils.getDataBaseUtilsInstance(context)
+                        .getBook(models.get(i).getId());
+                listener.onDeleteBookClick(v, model);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     @Override
@@ -91,6 +100,8 @@ public class BooksLibraryAdapter extends RecyclerView.Adapter<BooksLibraryAdapte
         MyTextView_Roboto_Medium authorName1;
         @BindView(R.id.backPageToPages)
         FrameLayout frameLayout;
+        @BindView(R.id.book_delete)
+        ImageView bookDelete;
 
         public LibraryViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -108,5 +119,6 @@ public class BooksLibraryAdapter extends RecyclerView.Adapter<BooksLibraryAdapte
 
     public interface OnBookLibraryClickListener {
         void onClickItem(View v, BookModel model);
+        void onDeleteBookClick(View v, LibraryModel model);
     }
 }

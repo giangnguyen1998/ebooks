@@ -225,4 +225,19 @@ public class DataBaseUtils extends SQLiteOpenHelper {
             }
         }
     }
+
+    public void deleteBook(long id) throws Exception {
+        SQLiteDatabase db = null;
+        try {
+            db = this.getWritableDatabase();
+            db.delete(TABLE_NAME, KEY_ID + " = ?",
+                    new String[]{String.valueOf(id)});
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        } finally {
+            if (db != null) {
+                db.close();
+            }
+        }
+    }
 }

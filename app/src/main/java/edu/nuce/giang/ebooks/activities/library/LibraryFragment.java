@@ -13,10 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,6 +45,7 @@ public class LibraryFragment extends Fragment implements BookLibraryView {
     TextView textView;
 
     private int value = 0;
+    private BookPresenter presenter;
 
     @Nullable
     @Override
@@ -60,8 +63,76 @@ public class LibraryFragment extends Fragment implements BookLibraryView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        BookPresenter presenter = new IBookPresenter(this);
+        presenter = new IBookPresenter(this);
 
+        getValue(presenter);
+
+    }
+
+    @Override
+    public void setListData(List<BookModel> models) {
+        BooksLibraryAdapter adapter = new BooksLibraryAdapter(getContext(), models, value);
+
+        recyclerLibrary.setHasFixedSize(true);
+        recyclerLibrary.setLayoutManager(new GridLayoutManager(
+                getContext(), 2, GridLayoutManager.VERTICAL, false
+        ));
+        recyclerLibrary.setNestedScrollingEnabled(true);
+        recyclerLibrary.setItemAnimator(new DefaultItemAnimator());
+        recyclerLibrary.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+        adapter.setListener(new BooksLibraryAdapter.OnBookLibraryClickListener() {
+            @Override
+            public void onClickItem(View v, BookModel model) {
+                Intent intent = new Intent(getContext(), EBookFictionActivity.class);
+                intent.putExtra("book", model);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onDeleteBookClick(View v, LibraryModel item) {
+                try {
+                    Utils.getDataBaseUtilsInstance(getContext())
+                            .deleteBook(item.getId());
+                    Toast.makeText(getContext(), "Xóa sách thành công!",Toast.LENGTH_SHORT).show();
+//                    getValue(presenter);
+                    for (BookModel model : models) {
+                        if (model.getId().equals(item.getBookId())) {
+                            models.remove(model);
+                            break;
+                        }
+                    }
+                    adapter.notifyDataSetChanged();
+                } catch (Exception e) {
+                    Toast.makeText(getContext(), "Xóa thất bại!",Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void setData(BookModel model) {
+
+    }
+
+    @Override
+    public void loadingData() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoadingData() {
+        progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onError(String error) {
+        Utils.showAlertDialog(getContext(), "Error", error).show();
+    }
+
+    private void getValue(BookPresenter presenter) {
         if (getArguments() != null) {
             value = getArguments().getInt("value");
             if (value != 0) {
@@ -85,56 +156,19 @@ public class LibraryFragment extends Fragment implements BookLibraryView {
                         e.printStackTrace();
                     }
                 }
-                if (list.size() > 0) {
-                    textView.setVisibility(View.GONE);
-                    List<Integer> ids = new ArrayList<>();
-                    for (LibraryModel item : list) {
-                        ids.add(item.getBookId());
-                    }
-                    presenter.getBooksByIds(ids);
-                }
+                getList(list);
             }
         }
-
     }
 
-    @Override
-    public void setListData(List<BookModel> models) {
-        BooksLibraryAdapter adapter = new BooksLibraryAdapter(getContext(), models, value);
-
-        recyclerLibrary.setHasFixedSize(true);
-        recyclerLibrary.setLayoutManager(new GridLayoutManager(
-                getContext(), 2, GridLayoutManager.VERTICAL, false
-        ));
-        recyclerLibrary.setNestedScrollingEnabled(true);
-        recyclerLibrary.setItemAnimator(new DefaultItemAnimator());
-        recyclerLibrary.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-
-        adapter.setListener(((v, model) -> {
-            Intent intent = new Intent(getContext(), EBookFictionActivity.class);
-            intent.putExtra("book", model);
-            startActivity(intent);
-        }));
-    }
-
-    @Override
-    public void setData(BookModel model) {
-
-    }
-
-    @Override
-    public void loadingData() {
-        progressBar.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideLoadingData() {
-        progressBar.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onError(String error) {
-        Utils.showAlertDialog(getContext(), "Error", error).show();
+    private void getList(List<LibraryModel> list) {
+        if (list.size() > 0) {
+            textView.setVisibility(View.GONE);
+            List<Integer> ids = new ArrayList<>();
+            for (LibraryModel item : list) {
+                ids.add(item.getBookId());
+            }
+            presenter.getBooksByIds(ids);
+        }
     }
 }
