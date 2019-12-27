@@ -52,6 +52,8 @@ public class EBookProfileFragment extends Fragment {
     RelativeLayout logout;
     @BindView(R.id.library_books)
     RelativeLayout library;
+    @BindView(R.id.sizeAllBooks)
+    TextView sizeAllBooks;
 
     @Nullable
     @Override
@@ -80,6 +82,12 @@ public class EBookProfileFragment extends Fragment {
             usernameUser.setText(model.getUser().getUsername());
             email.setText(model.getUser().getUsername());
             phoneNumber.setText(model.getUser().getPhone());
+            try {
+                long sizeBooksLibrary = Utils.getDataBaseUtilsInstance(getContext()).countBooks();
+                sizeAllBooks.setText(sizeBooksLibrary + " Books");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         logout.setOnClickListener(v -> {

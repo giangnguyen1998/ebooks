@@ -28,10 +28,17 @@ public class BooksLibraryAdapter extends RecyclerView.Adapter<BooksLibraryAdapte
     private Context context;
     private List<BookModel> models;
     private List<LibraryModel> libraryModels;
+    private int value;
+    private OnBookLibraryClickListener listener;
 
-    public BooksLibraryAdapter(Context context, List<BookModel> models) {
+    public BooksLibraryAdapter(Context context, List<BookModel> models, int value) {
         this.context = context;
         this.models = models;
+        this.value = value;
+    }
+
+    public void setListener(OnBookLibraryClickListener listener) {
+        this.listener = listener;
     }
 
     @NonNull
@@ -53,17 +60,18 @@ public class BooksLibraryAdapter extends RecyclerView.Adapter<BooksLibraryAdapte
                 .into(libraryViewHolder.bookImage1);
         libraryViewHolder.bookName1.setText(models.get(i).getName());
         libraryViewHolder.authorName1.setText(models.get(i).getAuthorName());
-        LibraryModel model = null;
-        try {
-            model = Utils.getDataBaseUtilsInstance(context).getBook(models.get(i).getId());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        assert model != null;
-        if (model.getPageCurrent() != 0 && model.getFinishBook() != 0) {
-            libraryViewHolder.pageToPages.setText(model.getPageCurrent() + "/" + model.getFinishBook());
-        } else
+        if (value == 3) {
             libraryViewHolder.frameLayout.setVisibility(View.GONE);
+        } else {
+            LibraryModel model = null;
+            try {
+                model = Utils.getDataBaseUtilsInstance(context).getBook(models.get(i).getId());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            assert model != null;
+            libraryViewHolder.pageToPages.setText(model.getPageCurrent() + "/" + model.getFinishBook());
+        }
     }
 
     @Override
@@ -71,7 +79,7 @@ public class BooksLibraryAdapter extends RecyclerView.Adapter<BooksLibraryAdapte
         return models.size();
     }
 
-    public class LibraryViewHolder extends RecyclerView.ViewHolder {
+    public class LibraryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.bookImage1)
         ImageView bookImage1;
@@ -88,6 +96,17 @@ public class BooksLibraryAdapter extends RecyclerView.Adapter<BooksLibraryAdapte
             super(itemView);
 
             ButterKnife.bind(this, itemView);
+
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            listener.onClickItem(v, models.get(getAdapterPosition()));
+        }
+    }
+
+    public interface OnBookLibraryClickListener {
+        void onClickItem(View v, BookModel model);
     }
 }

@@ -111,6 +111,7 @@
                     android:text="All My Books" />
 
                 <TextView
+                    android:id="@+id/sizeAllBooks"
                     style="@style/profileDetailsMiniText"
                     android:layout_toRightOf="@id/allBooks"
                     android:text="15 books" />

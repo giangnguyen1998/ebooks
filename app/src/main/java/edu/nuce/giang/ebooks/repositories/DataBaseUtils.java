@@ -74,6 +74,87 @@ public class DataBaseUtils extends SQLiteOpenHelper {
         return models;
     }
 
+    public List<LibraryModel> getAllBookFinished() throws Exception {
+        List<LibraryModel> models = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE "
+                + KEY_BOOK_PAGE_CURRENT + " > 0 AND " + KEY_BOOK_PAGE_CURRENT + " = " + KEY_FINISHED;
+        SQLiteDatabase database = null;
+        try {
+            database = this.getWritableDatabase();
+            @SuppressLint("Recycle") Cursor cursor = database.rawQuery(query, null);
+            if (cursor.moveToFirst()) {
+                cursor.moveToFirst();
+                do {
+                    LibraryModel model = new LibraryModel(
+                            cursor.getLong(0),
+                            cursor.getInt(1),
+                            cursor.getInt(2),
+                            cursor.getInt(3)
+                    );
+                    models.add(model);
+                } while (cursor.moveToNext());
+            }
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        } finally {
+            if (database != null) {
+                database.close();
+            }
+        }
+        return models;
+    }
+
+    public List<LibraryModel> getAllBookReadingNow() throws Exception {
+        List<LibraryModel> models = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE "
+                + KEY_BOOK_PAGE_CURRENT + " > 0 AND " + KEY_BOOK_PAGE_CURRENT + " < " + KEY_FINISHED;
+        SQLiteDatabase database = null;
+        try {
+            database = this.getWritableDatabase();
+            @SuppressLint("Recycle") Cursor cursor = database.rawQuery(query, null);
+            if (cursor.moveToFirst()) {
+                cursor.moveToFirst();
+                do {
+                    LibraryModel model = new LibraryModel(
+                            cursor.getLong(0),
+                            cursor.getInt(1),
+                            cursor.getInt(2),
+                            cursor.getInt(3)
+                    );
+                    models.add(model);
+                } while (cursor.moveToNext());
+            }
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        } finally {
+            if (database != null) {
+                database.close();
+            }
+        }
+        return models;
+    }
+
+    public long countBooks() throws Exception {
+        long count = 0;
+        String query = "SELECT COUNT(*) FROM " + TABLE_NAME;
+        SQLiteDatabase database = null;
+        try {
+            database = this.getWritableDatabase();
+            @SuppressLint("Recycle") Cursor cursor = database.rawQuery(query, null);
+            if (cursor.moveToFirst()) {
+                cursor.moveToFirst();
+                count = cursor.getLong(0);
+            }
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        } finally {
+            if (database != null) {
+                database.close();
+            }
+        }
+        return count;
+    }
+
     public long addBook(LibraryModel model) throws Exception {
         SQLiteDatabase database = null;
         long id;

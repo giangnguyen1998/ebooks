@@ -1,5 +1,6 @@
-package edu.nuce.giang.ebooks.activities;
+package edu.nuce.giang.ebooks.activities.library;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,6 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import edu.nuce.giang.ebooks.R;
 import edu.nuce.giang.ebooks.Utils;
+import edu.nuce.giang.ebooks.activities.detail.EBookFictionActivity;
 import edu.nuce.giang.ebooks.adapters.BooksLibraryAdapter;
 import edu.nuce.giang.ebooks.models.BookModel;
 import edu.nuce.giang.ebooks.models.LibraryModel;
@@ -40,6 +42,8 @@ public class LibraryFragment extends Fragment implements BookLibraryView {
     @BindView(R.id.nothingBook)
     TextView textView;
 
+    private int value = 0;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -57,25 +61,46 @@ public class LibraryFragment extends Fragment implements BookLibraryView {
         super.onViewCreated(view, savedInstanceState);
 
         BookPresenter presenter = new IBookPresenter(this);
-        try {
-            List<LibraryModel> list = Utils.getDataBaseUtilsInstance(getContext()).getAllBooks();
-            if (list.size() > 0) {
-                textView.setVisibility(View.GONE);
-                List<Integer> ids = new ArrayList<>();
-                for (LibraryModel item : list) {
-                    ids.add(item.getBookId());
+
+        if (getArguments() != null) {
+            value = getArguments().getInt("value");
+            if (value != 0) {
+                List<LibraryModel> list = new ArrayList<>();
+                if (value == 3) {
+                    try {
+                        list = Utils.getDataBaseUtilsInstance(getContext()).getAllBooks();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else if (value == 2) {
+                    try {
+                        list = Utils.getDataBaseUtilsInstance(getContext()).getAllBookFinished();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else if (value == 1) {
+                    try {
+                        list = Utils.getDataBaseUtilsInstance(getContext()).getAllBookReadingNow();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-                presenter.getBooksByIds(ids);
+                if (list.size() > 0) {
+                    textView.setVisibility(View.GONE);
+                    List<Integer> ids = new ArrayList<>();
+                    for (LibraryModel item : list) {
+                        ids.add(item.getBookId());
+                    }
+                    presenter.getBooksByIds(ids);
+                }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
 
     }
 
     @Override
     public void setListData(List<BookModel> models) {
-        BooksLibraryAdapter adapter = new BooksLibraryAdapter(getContext(), models);
+        BooksLibraryAdapter adapter = new BooksLibraryAdapter(getContext(), models, value);
 
         recyclerLibrary.setHasFixedSize(true);
         recyclerLibrary.setLayoutManager(new GridLayoutManager(
@@ -85,6 +110,12 @@ public class LibraryFragment extends Fragment implements BookLibraryView {
         recyclerLibrary.setItemAnimator(new DefaultItemAnimator());
         recyclerLibrary.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+        adapter.setListener(((v, model) -> {
+            Intent intent = new Intent(getContext(), EBookFictionActivity.class);
+            intent.putExtra("book", model);
+            startActivity(intent);
+        }));
     }
 
     @Override

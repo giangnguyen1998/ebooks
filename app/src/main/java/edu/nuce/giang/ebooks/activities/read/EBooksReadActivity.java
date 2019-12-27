@@ -112,7 +112,7 @@ public class EBooksReadActivity extends AppCompatActivity implements BookView {
                                         .updateNote(new LibraryModel(
                                                 model.getId(),
                                                 bookId,
-                                                currentPage,
+                                                currentPage + 1,
                                                 totalPages
                                         ));
                             }
