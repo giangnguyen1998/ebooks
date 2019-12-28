@@ -9,4 +9,5 @@ public interface BookPresenter extends BasePresenter<Integer> {
     void getBooksRelatedCategory(int categoryId);
     void getBooksRelatedAuthor(int authorId);
     void getBooksByIds(List<Integer> ids);
+    void getBooksHighScore();
 }

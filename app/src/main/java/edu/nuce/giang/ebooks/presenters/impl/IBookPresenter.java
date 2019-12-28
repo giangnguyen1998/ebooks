@@ -9,6 +9,7 @@ import edu.nuce.giang.ebooks.models.BookModel;
 import edu.nuce.giang.ebooks.presenters.BookPresenter;
 import edu.nuce.giang.ebooks.views.BookLibraryView;
 import edu.nuce.giang.ebooks.views.BookView;
+import edu.nuce.giang.ebooks.views.BooksScoreView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -17,6 +18,7 @@ public class IBookPresenter implements BookPresenter {
 
     private BookView view;
     private BookLibraryView libraryView;
+    private BooksScoreView scoreView;
 
     public IBookPresenter(BookLibraryView libraryView) {
         this.libraryView = libraryView;
@@ -24,6 +26,10 @@ public class IBookPresenter implements BookPresenter {
 
     public IBookPresenter(BookView view) {
         this.view = view;
+    }
+
+    public IBookPresenter(BooksScoreView scoreView) {
+        this.scoreView = scoreView;
     }
 
     @Override
@@ -161,9 +167,32 @@ public class IBookPresenter implements BookPresenter {
                     }
 
                     @Override
-                    public void onFailure(@NonNull Call<List<BookModel>> call,@NonNull Throwable t) {
+                    public void onFailure(@NonNull Call<List<BookModel>> call, @NonNull Throwable t) {
                         libraryView.hideLoadingData();
                         libraryView.onError(t.getLocalizedMessage());
+                    }
+                });
+    }
+
+    @Override
+    public void getBooksHighScore() {
+        scoreView.loadingBooks();
+        Utils.getEBookApiInstance()
+                .findAllBooksHighScore()
+                .enqueue(new Callback<List<BookModel>>() {
+                    @Override
+                    public void onResponse(@NonNull Call<List<BookModel>> call,
+                                           @NonNull Response<List<BookModel>> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            scoreView.hideLoadingBooks();
+                            scoreView.setBooksHighScore(response.body());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<List<BookModel>> call,@NonNull Throwable t) {
+                        scoreView.hideLoadingBooks();
+                        scoreView.onErrorLoading(t.getLocalizedMessage());
                     }
                 });
     }

@@ -25,6 +25,12 @@ import retrofit2.http.Query;
 
 public interface EBookApi {
 
+    @GET("authors/top")
+    Call<List<AuthorModel>> findAllTopAuthors();
+
+    @GET("books/score")
+    Call<List<BookModel>> findAllBooksHighScore();
+
     @GET("books/ids")
     Call<List<BookModel>> findAllBookByIds(@Query("id") List<Integer> ids);
 

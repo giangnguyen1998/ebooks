@@ -1,11 +1,15 @@
 package edu.nuce.giang.ebooks.activities.home;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,19 +26,28 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.nuce.giang.ebooks.R;
 import edu.nuce.giang.ebooks.Utils;
+import edu.nuce.giang.ebooks.activities.author.EBookAuthorActivity;
 import edu.nuce.giang.ebooks.activities.books.EBookListActivity;
+import edu.nuce.giang.ebooks.adapters.AuthorItemClickListener;
+import edu.nuce.giang.ebooks.adapters.AuthorsBookAdapter;
 import edu.nuce.giang.ebooks.adapters.BookItemClickListener;
 import edu.nuce.giang.ebooks.adapters.SliderBannerAdapter;
 import edu.nuce.giang.ebooks.adapters.ViewPagerBooksAdapter;
 import edu.nuce.giang.ebooks.dialogs.CustomSweetAlertDialog;
+import edu.nuce.giang.ebooks.models.AuthorModel;
 import edu.nuce.giang.ebooks.models.BookModel;
 import edu.nuce.giang.ebooks.activities.detail.EBookFictionActivity;
+import edu.nuce.giang.ebooks.presenters.AuthorPresenter;
 import edu.nuce.giang.ebooks.presenters.BookPresenter;
+import edu.nuce.giang.ebooks.presenters.impl.IAuthorPresenter;
 import edu.nuce.giang.ebooks.presenters.impl.IBookPresenter;
+import edu.nuce.giang.ebooks.views.AuthorTopView;
 import edu.nuce.giang.ebooks.views.BookView;
+import edu.nuce.giang.ebooks.views.BooksScoreView;
 
 
-public class EBookFragment extends Fragment implements BookView, BookItemClickListener {
+public class EBookFragment extends Fragment implements BookView, BookItemClickListener,
+        BooksScoreView, AuthorTopView, AuthorItemClickListener {
 
     @BindView(R.id.imageSlider)
     SliderView sliderBanner;
@@ -42,6 +55,14 @@ public class EBookFragment extends Fragment implements BookView, BookItemClickLi
     ViewPager viewPagerBook;
     @BindView(R.id.shimmerPagerBooks)
     ShimmerFrameLayout shimmerPagerBooks;
+    @BindView(R.id.viewPagerScore)
+    ViewPager viewPagerScore;
+    @BindView(R.id.shimmerPagerScore)
+    ShimmerFrameLayout shimmerPagerScore;
+    @BindView(R.id.recycler_authors)
+    RecyclerView recyclerAuthors;
+    @BindView(R.id.shimmerAuthors)
+    ShimmerFrameLayout shimmerAuthors;
 
     @Nullable
     @Override
@@ -61,8 +82,12 @@ public class EBookFragment extends Fragment implements BookView, BookItemClickLi
 
         setUpSliderBannerImage();
 
-        BookPresenter presenter = new IBookPresenter(this);
-        presenter.getListData();
+        BookPresenter presenterBook = new IBookPresenter((BookView) this);
+        presenterBook.getListData();
+        BookPresenter presenterScore = new IBookPresenter((BooksScoreView) this);
+        presenterScore.getBooksHighScore();
+        AuthorPresenter presenterAuthor = new IAuthorPresenter(this);
+        presenterAuthor.getTopAuthors();
     }
 
     private void setUpSliderBannerImage() {
@@ -118,6 +143,76 @@ public class EBookFragment extends Fragment implements BookView, BookItemClickLi
         Intent intent = new Intent(getActivity(), EBookFictionActivity.class);
         intent.putExtra("book", model);
         startActivity(intent);
+    }
+
+    @Override
+    public void setBooksHighScore(List<BookModel> modelList) {
+        ViewPagerBooksAdapter adapter = new ViewPagerBooksAdapter(
+                modelList,
+                getContext(),
+                this
+        );
+        viewPagerScore.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void loadingBooks() {
+        shimmerPagerScore.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoadingBooks() {
+        shimmerPagerScore.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onErrorLoading(String message) {
+        new CustomSweetAlertDialog(getContext())
+                .alertDialogError("Error!", message);
+    }
+
+    @Override
+    public void setAuthorsTop(List<AuthorModel> models) {
+        recyclerAuthors.setHasFixedSize(true);
+        recyclerAuthors.setLayoutManager(new GridLayoutManager(
+                getContext(),
+                2,
+                GridLayoutManager.VERTICAL,
+                false
+        ));
+        recyclerAuthors.setItemAnimator(new DefaultItemAnimator());
+        recyclerAuthors.setNestedScrollingEnabled(true);
+        //adapter
+        AuthorsBookAdapter adapter = new AuthorsBookAdapter(getContext(), models, this);
+
+        recyclerAuthors.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void loadingAuthors() {
+        shimmerAuthors.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoadingAuthors() {
+        shimmerAuthors.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onErrorLoadingAuthors(String message) {
+        new CustomSweetAlertDialog(getContext())
+                .alertDialogError("Error!", message);
+    }
+
+    @Override
+    public void onItemClicked(ImageView authorImage, AuthorModel model) {
+        Intent intent = new Intent(getActivity(), EBookAuthorActivity.class);
+        intent.putExtra("authorId", model.getAuthorId());
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getActivity(),
+                authorImage, "authorImageTransition");
+        startActivity(intent, options.toBundle());
     }
 
     @Override
