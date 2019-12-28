@@ -32,6 +32,7 @@ import edu.nuce.giang.ebooks.adapters.BookItemClickListener;
 import edu.nuce.giang.ebooks.adapters.ViewPagerBooksAdapter;
 import edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Medium;
 import edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Regular;
+import edu.nuce.giang.ebooks.dialogs.CustomSweetAlertDialog;
 import edu.nuce.giang.ebooks.models.AuthorModel;
 import edu.nuce.giang.ebooks.models.BookModel;
 import edu.nuce.giang.ebooks.activities.detail.EBookFictionActivity;
@@ -180,7 +181,8 @@ public class EBookAuthorActivity extends AppCompatActivity implements EBookAutho
 
     @Override
     public void onErrorLoading(String message) {
-        Utils.showAlertDialog(this, "Error", message).show();
+        new CustomSweetAlertDialog(this)
+                .alertDialogError("Error!", message);
     }
 
     private List<BookModel> getFiveItems(List<BookModel> books) {

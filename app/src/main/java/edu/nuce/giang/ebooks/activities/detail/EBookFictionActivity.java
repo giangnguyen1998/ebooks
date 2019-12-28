@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
@@ -21,8 +22,10 @@ import edu.nuce.giang.ebooks.adapters.FictionTabAdapter;
 import edu.nuce.giang.ebooks.adapters.FictionTabAdapterSelected;
 import edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Medium;
 import edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Regular;
+import edu.nuce.giang.ebooks.dialogs.CustomSweetAlertDialog;
 import edu.nuce.giang.ebooks.models.BookModel;
 import edu.nuce.giang.ebooks.activities.WrapContentHeightViewPager;
+import edu.nuce.giang.ebooks.models.LibraryModel;
 import edu.nuce.giang.ebooks.presenters.BookPresenter;
 import edu.nuce.giang.ebooks.presenters.impl.IBookPresenter;
 import edu.nuce.giang.ebooks.views.BookView;
@@ -46,6 +49,8 @@ public class EBookFictionActivity extends AppCompatActivity implements BookView,
     Button bookRead;
     @BindView(R.id.ic_back)
     ImageView onBack;
+    @BindView(R.id.btnBooksMark)
+    ImageButton btnBooksMark;
 
     BookPresenter presenter;
 
@@ -71,6 +76,33 @@ public class EBookFictionActivity extends AppCompatActivity implements BookView,
                     EBooksReadActivity.class);
             intent1.putExtra("bookId", model.getId());
             startActivity(intent1);
+        });
+
+        btnBooksMark.setOnClickListener(v -> {
+            try {
+                LibraryModel libraryModel = Utils.getDataBaseUtilsInstance(EBookFictionActivity.this)
+                        .getBook(model.getId());
+                if (libraryModel == null) {
+                    Utils.getDataBaseUtilsInstance(EBookFictionActivity.this)
+                            .addBook(new LibraryModel(
+                                    model.getId(),
+                                    0,
+                                    0
+                            ));
+                    new CustomSweetAlertDialog(EBookFictionActivity.this)
+                            .alertDialogSuccess(
+                                    "Successfully!"
+                                    , "Your books has been saved to books mark!"
+                            );
+                } else {
+                    new CustomSweetAlertDialog(EBookFictionActivity.this)
+                            .alertDialogError(
+                                    "Failure!",
+                                    "Your book has been had in books mark!");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
 
         onBack.setOnClickListener(v -> {
@@ -156,7 +188,8 @@ public class EBookFictionActivity extends AppCompatActivity implements BookView,
 
     @Override
     public void onError(String error) {
-        Utils.showAlertDialog(this, "Error", error).show();
+        new CustomSweetAlertDialog(this)
+                .alertDialogError("Error!", error);
     }
 
     @Override

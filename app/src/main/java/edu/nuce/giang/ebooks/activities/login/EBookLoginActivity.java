@@ -2,6 +2,7 @@ package edu.nuce.giang.ebooks.activities.login;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -13,10 +14,12 @@ import android.widget.ViewFlipper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import edu.nuce.giang.ebooks.R;
 import edu.nuce.giang.ebooks.Utils;
 import edu.nuce.giang.ebooks.activities.home.EBookHome2Activity;
 import edu.nuce.giang.ebooks.base.SharedPrefs;
+import edu.nuce.giang.ebooks.dialogs.CustomSweetAlertDialog;
 import edu.nuce.giang.ebooks.models.CheckLoginModel;
 import edu.nuce.giang.ebooks.models.UserModel;
 import edu.nuce.giang.ebooks.presenters.UserPresenter;
@@ -48,7 +51,7 @@ public class EBookLoginActivity extends AppCompatActivity implements UserView, U
     @BindView(R.id.btnRegister)
     Button btnRegister;
 
-    private ProgressDialog dialog;
+    private SweetAlertDialog pDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,7 +70,7 @@ public class EBookLoginActivity extends AppCompatActivity implements UserView, U
 
         UserPresenter presenter = new IUserPresenter(this, this);
 
-        dialog = new ProgressDialog(this);
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
 
         cirLoginButton.setOnClickListener(v -> {
             if (textEmail.getText().length() >= 15 && textPassword.getText().length() >= 6) {
@@ -144,19 +147,22 @@ public class EBookLoginActivity extends AppCompatActivity implements UserView, U
 
     @Override
     public void loginFailure(String message) {
-        Utils.showAlertDialog(this, "Notification!", message).show();
+        new CustomSweetAlertDialog(this)
+                .alertDialogError("Error!", message);
     }
 
     @Override
     public void loadingCheck() {
-        dialog.setMessage("Doing check account, please wait.");
-        dialog.show();
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Doing check account!, Please wait ...");
+        pDialog.setCancelable(true);
+        pDialog.show();
     }
 
     @Override
     public void hideLoading() {
-        if (dialog.isShowing()) {
-            dialog.dismiss();
+        if (pDialog.isShowing()) {
+            pDialog.dismiss();
         }
     }
 
@@ -173,19 +179,22 @@ public class EBookLoginActivity extends AppCompatActivity implements UserView, U
 
     @Override
     public void processRegister() {
-        dialog.setMessage("Doing register account, please wait.");
-        dialog.show();
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Doing register account!, please wait ...");
+        pDialog.setCancelable(true);
+        pDialog.show();
     }
 
     @Override
     public void finishedProcessRegister() {
-        if (dialog.isShowing()) {
-            dialog.dismiss();
+        if (pDialog.isShowing()) {
+            pDialog.dismiss();
         }
     }
 
     @Override
     public void onError(String error) {
-        Utils.showAlertDialog(this, "Error", error).show();
+        new CustomSweetAlertDialog(this)
+                .alertDialogError("Error!", error);
     }
 }

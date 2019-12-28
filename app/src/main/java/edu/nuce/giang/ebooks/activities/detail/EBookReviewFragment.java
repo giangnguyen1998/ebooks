@@ -29,6 +29,7 @@ import edu.nuce.giang.ebooks.Utils;
 import edu.nuce.giang.ebooks.adapters.CommentsBookAdapter;
 import edu.nuce.giang.ebooks.base.SharedPrefs;
 import edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Regular;
+import edu.nuce.giang.ebooks.dialogs.CustomSweetAlertDialog;
 import edu.nuce.giang.ebooks.models.CommentModel;
 import edu.nuce.giang.ebooks.presenters.CommentPresenter;
 import edu.nuce.giang.ebooks.presenters.impl.ICommentPresenter;
@@ -140,7 +141,8 @@ public class EBookReviewFragment extends Fragment implements CommentView, Commen
 
     @Override
     public void onErrorLoading(String error) {
-        Utils.showAlertDialog(getContext(), "Error", error).show();
+        new CustomSweetAlertDialog(getContext())
+                .alertDialogError("Error!", error);
     }
 
     private float computeRating(List<CommentModel> models) {
@@ -189,6 +191,7 @@ public class EBookReviewFragment extends Fragment implements CommentView, Commen
 
     @Override
     public void onErrorSave(String error) {
-        Utils.showAlertDialog(getContext(), "Error", error).show();
+        new CustomSweetAlertDialog(getContext())
+                .alertDialogError("Error!", error);
     }
 }

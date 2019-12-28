@@ -24,12 +24,15 @@ import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import edu.nuce.giang.ebooks.R;
 import edu.nuce.giang.ebooks.Utils;
 import edu.nuce.giang.ebooks.activities.library.EBookLibraryActivity;
 import edu.nuce.giang.ebooks.activities.photo.StoreImageActivity;
 import edu.nuce.giang.ebooks.activities.login.EBookLoginActivity;
 import edu.nuce.giang.ebooks.base.SharedPrefs;
+import edu.nuce.giang.ebooks.dialogs.CustomSweetAlertDialog;
+import edu.nuce.giang.ebooks.models.BookModel;
 import edu.nuce.giang.ebooks.models.CheckLoginModel;
 
 public class EBookProfileFragment extends Fragment {
@@ -107,15 +110,16 @@ public class EBookProfileFragment extends Fragment {
     }
 
     private void showAlertLogout(Context context, Activity activity) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Log out");
-        builder.setMessage("Are you sure to log out?");
-        builder.setCancelable(true);
 
-        builder.setPositiveButton(
-                "Yes",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+        new SweetAlertDialog(Objects.requireNonNull(getContext()),
+                SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("Log out?")
+                .setContentText("Are you sure to log out?")
+                .setConfirmText("Allow!")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        sDialog.dismissWithAnimation();
                         SharedPrefs prefs = new SharedPrefs(context);
                         prefs.clearAccount();
                         startActivity(
@@ -126,15 +130,17 @@ public class EBookProfileFragment extends Fragment {
                         );
                         activity.finish();
                     }
-                });
-
-        builder.setNegativeButton(
-                "No",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
+                })
+                .setCancelButton("Cancel!", new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        sDialog.dismissWithAnimation();
+                        new CustomSweetAlertDialog(getContext())
+                                .alertDialogError(
+                                        "Cancelled!",
+                                        "Your action has been cancelled!");
                     }
-                });
-        builder.create().show();
+                })
+                .show();
     }
 }

@@ -20,6 +20,7 @@ import edu.nuce.giang.ebooks.R;
 import edu.nuce.giang.ebooks.Utils;
 import edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Bold;
 import edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Medium;
+import edu.nuce.giang.ebooks.dialogs.CustomSweetAlertDialog;
 import edu.nuce.giang.ebooks.models.BookModel;
 import edu.nuce.giang.ebooks.presenters.BookPresenter;
 import edu.nuce.giang.ebooks.presenters.impl.IBookPresenter;
@@ -94,7 +95,8 @@ public class EBookFragment extends Fragment implements BookView {
 
     @Override
     public void onError(String error) {
-        Utils.showAlertDialog(getContext(), "Error", error).show();
+        new CustomSweetAlertDialog(getContext())
+                .alertDialogError("Error!", error);
     }
 
     @Override

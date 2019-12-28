@@ -22,10 +22,12 @@ import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import edu.nuce.giang.ebooks.R;
 import edu.nuce.giang.ebooks.Utils;
 import edu.nuce.giang.ebooks.activities.detail.EBookFictionActivity;
 import edu.nuce.giang.ebooks.adapters.BooksLibraryAdapter;
+import edu.nuce.giang.ebooks.dialogs.CustomSweetAlertDialog;
 import edu.nuce.giang.ebooks.models.BookModel;
 import edu.nuce.giang.ebooks.models.LibraryModel;
 import edu.nuce.giang.ebooks.presenters.BookPresenter;
@@ -92,22 +94,52 @@ public class LibraryFragment extends Fragment implements BookLibraryView {
 
             @Override
             public void onDeleteBookClick(View v, LibraryModel item) {
-                try {
-                    Utils.getDataBaseUtilsInstance(getContext())
-                            .deleteBook(item.getId());
-                    Toast.makeText(getContext(), "Xóa sách thành công!",Toast.LENGTH_SHORT).show();
-//                    getValue(presenter);
-                    for (BookModel model : models) {
-                        if (model.getId().equals(item.getBookId())) {
-                            models.remove(model);
-                            break;
-                        }
-                    }
-                    adapter.notifyDataSetChanged();
-                } catch (Exception e) {
-                    Toast.makeText(getContext(), "Xóa thất bại!",Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
-                }
+                new SweetAlertDialog(Objects.requireNonNull(getContext()),
+                        SweetAlertDialog.WARNING_TYPE)
+                        .setTitleText("Are you sure?")
+                        .setContentText("You won't be able to recover this book!")
+                        .setConfirmText("Delete!")
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                sDialog.dismissWithAnimation();
+
+                                try {
+                                    Utils.getDataBaseUtilsInstance(getContext())
+                                            .deleteBook(item.getId());
+                                    new CustomSweetAlertDialog(getContext())
+                                            .alertDialogSuccess(
+                                                    "Successfully!"
+                                                    , "Your book has been deleted!"
+                                            );
+                                    for (BookModel model : models) {
+                                        if (model.getId().equals(item.getBookId())) {
+                                            models.remove(model);
+                                            break;
+                                        }
+                                    }
+                                    adapter.notifyDataSetChanged();
+                                } catch (Exception e) {
+                                    new CustomSweetAlertDialog(getContext())
+                                            .alertDialogError(
+                                                    "Failure!",
+                                                    "Your action has been Failure!"
+                                            );
+                                    e.printStackTrace();
+                                }
+                            }
+                        })
+                        .setCancelButton("Cancel!", new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                sDialog.dismissWithAnimation();
+                                new CustomSweetAlertDialog(getContext())
+                                        .alertDialogError(
+                                                "Cancelled!",
+                                                "Your action has been cancelled!");
+                            }
+                        })
+                        .show();
             }
         });
     }
@@ -129,7 +161,8 @@ public class LibraryFragment extends Fragment implements BookLibraryView {
 
     @Override
     public void onError(String error) {
-        Utils.showAlertDialog(getContext(), "Error", error).show();
+        new CustomSweetAlertDialog(getContext())
+                .alertDialogError("Error!", error);
     }
 
     private void getValue(BookPresenter presenter) {

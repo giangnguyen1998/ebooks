@@ -116,6 +116,7 @@
                         android:textStyle="bold" />
 
                     <ImageButton
+                        android:id="@+id/btnBooksMark"
                         android:layout_width="0dp"
                         android:layout_height="35dp"
                         android:layout_marginLeft="5dp"

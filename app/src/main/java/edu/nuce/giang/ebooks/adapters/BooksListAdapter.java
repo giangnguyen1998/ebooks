@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 import edu.nuce.giang.ebooks.R;
 import edu.nuce.giang.ebooks.Utils;
 import edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Regular;
+import edu.nuce.giang.ebooks.dialogs.CustomSweetAlertDialog;
 import edu.nuce.giang.ebooks.models.BookModel;
 import edu.nuce.giang.ebooks.models.LibraryModel;
 
@@ -96,9 +97,16 @@ public class BooksListAdapter extends RecyclerView.Adapter<BooksListAdapter.MyVi
                                     0,
                                     0
                             ));
-                    Toast.makeText(context,"Thêm vào Book Marks Thành Công!",Toast.LENGTH_SHORT).show();
+                    new CustomSweetAlertDialog(context)
+                            .alertDialogSuccess(
+                                    "Successfully!"
+                                    , "Your books has been saved to books mark!"
+                            );
                 } else {
-                    Toast.makeText(context,"Sách đã có trong Book Marks!",Toast.LENGTH_SHORT).show();
+                    new CustomSweetAlertDialog(context)
+                            .alertDialogError(
+                                    "Failure!",
+                                    "Your book has been had in books mark!");
                 }
             } catch (Exception e) {
                 e.printStackTrace();

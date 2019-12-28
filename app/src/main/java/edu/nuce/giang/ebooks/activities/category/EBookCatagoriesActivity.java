@@ -29,6 +29,7 @@ import edu.nuce.giang.ebooks.activities.detail.EBookFictionActivity;
 import edu.nuce.giang.ebooks.activities.filter.EBookFilterActivity;
 import edu.nuce.giang.ebooks.adapters.BooksListAdapter;
 import edu.nuce.giang.ebooks.customfonts.EditText_Roboto_Medium;
+import edu.nuce.giang.ebooks.dialogs.CustomSweetAlertDialog;
 import edu.nuce.giang.ebooks.models.BookModel;
 import edu.nuce.giang.ebooks.models.CollectionModel;
 
@@ -145,7 +146,8 @@ public class EBookCatagoriesActivity extends AppCompatActivity implements
 
     @Override
     public void onErrorLoading(String message) {
-        Utils.showAlertDialog(this, "Error", message).show();
+        new CustomSweetAlertDialog(this)
+                .alertDialogError("Error!", message);
     }
 
     @Override

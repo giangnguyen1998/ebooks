@@ -23,6 +23,7 @@ import edu.nuce.giang.ebooks.R;
 import edu.nuce.giang.ebooks.Utils;
 import edu.nuce.giang.ebooks.adapters.BooksListAdapter;
 import edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Medium;
+import edu.nuce.giang.ebooks.dialogs.CustomSweetAlertDialog;
 import edu.nuce.giang.ebooks.models.BookModel;
 import edu.nuce.giang.ebooks.activities.detail.EBookFictionActivity;
 import edu.nuce.giang.ebooks.activities.filter.EBookFilterActivity;
@@ -103,7 +104,8 @@ public class EBookListActivity extends AppCompatActivity implements BookView {
 
     @Override
     public void onError(String error) {
-        Utils.showAlertDialog(this, "Error", error).show();
+        new CustomSweetAlertDialog(this)
+                .alertDialogError("Error!", error);
     }
 
     @Override

@@ -25,6 +25,7 @@ import edu.nuce.giang.ebooks.Utils;
 import edu.nuce.giang.ebooks.activities.category.EBookCatagoriesActivity;
 import edu.nuce.giang.ebooks.adapters.CategoryItemClickListener;
 import edu.nuce.giang.ebooks.adapters.CollectionsBookAdapter;
+import edu.nuce.giang.ebooks.dialogs.CustomSweetAlertDialog;
 import edu.nuce.giang.ebooks.models.CollectionModel;
 import edu.nuce.giang.ebooks.presenters.CollectionPresenter;
 import edu.nuce.giang.ebooks.presenters.impl.ICollectionPresenter;
@@ -106,6 +107,7 @@ public class EBookCollectionFragment extends Fragment implements CollectionView,
 
     @Override
     public void onError(String error) {
-        Utils.showAlertDialog(getContext(), "Error", error).show();
+        new CustomSweetAlertDialog(getContext())
+                .alertDialogError("Error!", error);
     }
 }

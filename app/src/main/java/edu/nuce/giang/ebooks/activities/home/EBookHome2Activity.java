@@ -20,6 +20,7 @@ import edu.nuce.giang.ebooks.activities.filter.EBookFilterActivity;
 import edu.nuce.giang.ebooks.adapters.FictionTabAdapterSelected;
 import edu.nuce.giang.ebooks.adapters.IconAdapter;
 import edu.nuce.giang.ebooks.base.SharedPrefs;
+import edu.nuce.giang.ebooks.dialogs.CustomSweetAlertDialog;
 import edu.nuce.giang.ebooks.models.CheckLoginModel;
 
 public class EBookHome2Activity extends AppCompatActivity implements FictionTabAdapterSelected {
@@ -74,7 +75,8 @@ public class EBookHome2Activity extends AppCompatActivity implements FictionTabA
         String status = getIntent().getStringExtra("status");
         if (status != null && !status.equals("")) {
             viewPager.setCurrentItem(3);
-            Toast.makeText(getApplicationContext(),status,Toast.LENGTH_SHORT).show();
+            new CustomSweetAlertDialog(EBookHome2Activity.this)
+                    .alertDialogSuccess("Successfully!", status);
         }
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -102,7 +104,6 @@ public class EBookHome2Activity extends AppCompatActivity implements FictionTabA
                 return new EBookFragment();
             case 1:
                 return new EBookAuthorFragment();
-
             case 2:
                 return new EBookCollectionFragment();
             case 3:

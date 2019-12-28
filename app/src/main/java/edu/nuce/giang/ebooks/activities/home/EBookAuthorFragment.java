@@ -24,6 +24,7 @@ import edu.nuce.giang.ebooks.R;
 import edu.nuce.giang.ebooks.Utils;
 import edu.nuce.giang.ebooks.adapters.AuthorItemClickListener;
 import edu.nuce.giang.ebooks.adapters.AuthorsBookAdapter;
+import edu.nuce.giang.ebooks.dialogs.CustomSweetAlertDialog;
 import edu.nuce.giang.ebooks.models.AuthorModel;
 import edu.nuce.giang.ebooks.activities.author.EBookAuthorActivity;
 import edu.nuce.giang.ebooks.presenters.AuthorPresenter;
@@ -107,6 +108,7 @@ public class EBookAuthorFragment extends Fragment implements AuthorView,
 
     @Override
     public void onError(String error) {
-        Utils.showAlertDialog(getContext(), "Error", error).show();
+        new CustomSweetAlertDialog(getContext())
+                .alertDialogError("Error!", error);
     }
 }

@@ -31,7 +31,7 @@ import butterknife.ButterKnife;
 import edu.nuce.giang.ebooks.R;
 import edu.nuce.giang.ebooks.Utils;
 import edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Regular;
-import edu.nuce.giang.ebooks.dialogs.ShareBottomDialog;
+import edu.nuce.giang.ebooks.dialogs.CustomSweetAlertDialog;
 import edu.nuce.giang.ebooks.models.BookModel;
 import edu.nuce.giang.ebooks.models.LibraryModel;
 import edu.nuce.giang.ebooks.presenters.BookPresenter;
@@ -237,7 +237,8 @@ public class EBooksReadActivity extends AppCompatActivity implements BookView {
 
     @Override
     public void onError(String error) {
-        Utils.showAlertDialog(this, "Error", error).show();
+        new CustomSweetAlertDialog(this)
+                .alertDialogError("Error!", error);
     }
 
     @Override

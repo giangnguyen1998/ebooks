@@ -26,6 +26,7 @@ import edu.nuce.giang.ebooks.activities.books.EBookListActivity;
 import edu.nuce.giang.ebooks.adapters.BookItemClickListener;
 import edu.nuce.giang.ebooks.adapters.SliderBannerAdapter;
 import edu.nuce.giang.ebooks.adapters.ViewPagerBooksAdapter;
+import edu.nuce.giang.ebooks.dialogs.CustomSweetAlertDialog;
 import edu.nuce.giang.ebooks.models.BookModel;
 import edu.nuce.giang.ebooks.activities.detail.EBookFictionActivity;
 import edu.nuce.giang.ebooks.presenters.BookPresenter;
@@ -92,7 +93,8 @@ public class EBookFragment extends Fragment implements BookView, BookItemClickLi
 
     @Override
     public void onError(String error) {
-        Utils.showAlertDialog(getContext(), "Error", error).show();
+        new CustomSweetAlertDialog(getContext())
+                .alertDialogError("Error!", error);
     }
 
     private List<BookModel> getFiveItems(List<BookModel> books) {
