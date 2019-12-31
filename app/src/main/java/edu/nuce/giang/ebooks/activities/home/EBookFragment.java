@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,7 @@ import edu.nuce.giang.ebooks.activities.books.EBookListActivity;
 import edu.nuce.giang.ebooks.adapters.AuthorItemClickListener;
 import edu.nuce.giang.ebooks.adapters.AuthorsBookAdapter;
 import edu.nuce.giang.ebooks.adapters.BookItemClickListener;
+import edu.nuce.giang.ebooks.adapters.BookPagerAdapter;
 import edu.nuce.giang.ebooks.adapters.SliderBannerAdapter;
 import edu.nuce.giang.ebooks.adapters.ViewPagerBooksAdapter;
 import edu.nuce.giang.ebooks.dialogs.CustomSweetAlertDialog;
@@ -52,11 +54,11 @@ public class EBookFragment extends Fragment implements BookView, BookItemClickLi
     @BindView(R.id.imageSlider)
     SliderView sliderBanner;
     @BindView(R.id.viewPagerBook)
-    ViewPager viewPagerBook;
+    RecyclerView viewPagerBook;
     @BindView(R.id.shimmerPagerBooks)
     ShimmerFrameLayout shimmerPagerBooks;
     @BindView(R.id.viewPagerScore)
-    ViewPager viewPagerScore;
+    RecyclerView viewPagerScore;
     @BindView(R.id.shimmerPagerScore)
     ShimmerFrameLayout shimmerPagerScore;
     @BindView(R.id.recycler_authors)
@@ -97,11 +99,13 @@ public class EBookFragment extends Fragment implements BookView, BookItemClickLi
 
     @Override
     public void setListData(List<BookModel> models) {
-        ViewPagerBooksAdapter adapter = new ViewPagerBooksAdapter(
-                getFiveItems(models),
-                getContext(),
-                this
-        );
+        BookPagerAdapter adapter = new BookPagerAdapter(getContext(), getFiveItems(models),
+                this);
+        viewPagerBook.setHasFixedSize(true);
+        viewPagerBook.setItemAnimator(new DefaultItemAnimator());
+        viewPagerBook.setLayoutManager(new LinearLayoutManager(
+                getContext(), LinearLayoutManager.HORIZONTAL,false
+        ));
         viewPagerBook.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
@@ -142,16 +146,19 @@ public class EBookFragment extends Fragment implements BookView, BookItemClickLi
     public void onItemClicked(ImageView bookImage, BookModel model) {
         Intent intent = new Intent(getActivity(), EBookFictionActivity.class);
         intent.putExtra("book", model);
+//        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getActivity(),
+//                bookImage, "sharedBookModelTran");
         startActivity(intent);
     }
 
     @Override
     public void setBooksHighScore(List<BookModel> modelList) {
-        ViewPagerBooksAdapter adapter = new ViewPagerBooksAdapter(
-                modelList,
-                getContext(),
-                this
-        );
+        BookPagerAdapter adapter = new BookPagerAdapter(getContext(), modelList, this);
+        viewPagerScore.setHasFixedSize(true);
+        viewPagerScore.setItemAnimator(new DefaultItemAnimator());
+        viewPagerScore.setLayoutManager(new LinearLayoutManager(
+                getContext(), LinearLayoutManager.HORIZONTAL,false
+        ));
         viewPagerScore.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }

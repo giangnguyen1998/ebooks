@@ -66,17 +66,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <android.support.v4.view.ViewPager
+                <android.support.v7.widget.RecyclerView
                     android:id="@+id/viewPagerBook"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="5dp"
-                    android:layout_marginBottom="0dp"
-                    android:clipToPadding="false"
-                    android:foregroundGravity="center"
-                    android:overScrollMode="never" />
+                    android:layout_marginBottom="0dp" />
 
                 <include
                     android:id="@+id/shimmerPagerBooks"
@@ -99,17 +96,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <android.support.v4.view.ViewPager
+                <android.support.v7.widget.RecyclerView
                     android:id="@+id/viewPagerScore"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="5dp"
-                    android:layout_marginBottom="0dp"
-                    android:clipToPadding="false"
-                    android:foregroundGravity="center"
-                    android:overScrollMode="never" />
+                    android:layout_marginBottom="0dp" />
 
                 <include
                     android:id="@+id/shimmerPagerScore"
@@ -132,8 +126,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
                 android:layout_marginTop="18.3dp"
+                android:layout_marginEnd="5dp"
                 android:layout_marginBottom="20dp"
                 android:orientation="vertical">
 

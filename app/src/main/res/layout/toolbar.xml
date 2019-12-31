@@ -68,7 +68,7 @@
                 android:background="@color/transperentColor"
                 android:editable="false"
                 android:focusable="false"
-                android:hint="Search Books, Author, Gerne"
+                android:hint="Search Books, Author"
                 android:paddingLeft="6.7dp"
                 android:textColorHint="@color/hintColor"
                 android:textSize="13sp"

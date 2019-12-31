@@ -9,6 +9,9 @@ import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +32,7 @@ import butterknife.ButterKnife;
 import edu.nuce.giang.ebooks.R;
 import edu.nuce.giang.ebooks.Utils;
 import edu.nuce.giang.ebooks.adapters.BookItemClickListener;
+import edu.nuce.giang.ebooks.adapters.BookPagerAdapter;
 import edu.nuce.giang.ebooks.adapters.ViewPagerBooksAdapter;
 import edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Medium;
 import edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Regular;
@@ -61,7 +65,7 @@ public class EBookAuthorActivity extends AppCompatActivity implements EBookAutho
     @BindView(R.id.shimmerPagerBooksAuthor)
     ShimmerFrameLayout shimmerFrameLayout;
     @BindView(R.id.pagerBooksAuthor)
-    ViewPager pagerBooks;
+    RecyclerView pagerBooks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,7 +158,13 @@ public class EBookAuthorActivity extends AppCompatActivity implements EBookAutho
 
     @Override
     public void setBooksAuthor(List<BookModel> models) {
-        ViewPagerBooksAdapter adapter = new ViewPagerBooksAdapter(getFiveItems(models), this, this);
+        BookPagerAdapter adapter = new BookPagerAdapter(this, getFiveItems(models),
+                this);
+        pagerBooks.setHasFixedSize(true);
+        pagerBooks.setItemAnimator(new DefaultItemAnimator());
+        pagerBooks.setLayoutManager(new LinearLayoutManager(
+                EBookAuthorActivity.this, LinearLayoutManager.HORIZONTAL,false
+        ));
         pagerBooks.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }

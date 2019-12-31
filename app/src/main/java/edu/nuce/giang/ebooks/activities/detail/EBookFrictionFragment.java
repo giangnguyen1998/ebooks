@@ -6,6 +6,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +23,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import edu.nuce.giang.ebooks.R;
 import edu.nuce.giang.ebooks.Utils;
+import edu.nuce.giang.ebooks.activities.author.EBookAuthorActivity;
 import edu.nuce.giang.ebooks.adapters.BookItemClickListener;
+import edu.nuce.giang.ebooks.adapters.BookPagerAdapter;
 import edu.nuce.giang.ebooks.adapters.ViewPagerBooksAdapter;
 import edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Medium;
 import edu.nuce.giang.ebooks.dialogs.CustomSweetAlertDialog;
@@ -37,9 +42,9 @@ public class EBookFrictionFragment extends Fragment implements BookView, BookIte
     @BindView(R.id.shimmerPagerBooksCategory)
     ShimmerFrameLayout shimmerBooksCategory;
     @BindView(R.id.viewPagerBookRelatedCategory)
-    ViewPager viewPagerBookRelatedCategory;
+    RecyclerView viewPagerBookRelatedCategory;
     @BindView(R.id.viewPagerBookRelatedAuthor)
-    ViewPager viewPagerBookRelatedAuthor;
+    RecyclerView viewPagerBookRelatedAuthor;
     @BindView(R.id.relatedBookAuthor)
     MyTextView_Roboto_Medium relatedBookAuthor;
 
@@ -96,21 +101,26 @@ public class EBookFrictionFragment extends Fragment implements BookView, BookIte
 
     @Override
     public void setRelatedBooksCategory(List<BookModel> models) {
-        ViewPagerBooksAdapter adapter = new ViewPagerBooksAdapter(
-                getFiveItems(models),
-                getContext(),
-                this
-        );
+        BookPagerAdapter adapter = new BookPagerAdapter(getContext(), getFiveItems(models),
+                this);
+        viewPagerBookRelatedCategory.setHasFixedSize(true);
+        viewPagerBookRelatedCategory.setItemAnimator(new DefaultItemAnimator());
+        viewPagerBookRelatedCategory.setLayoutManager(new LinearLayoutManager(
+                getContext(), LinearLayoutManager.HORIZONTAL,false
+        ));
         viewPagerBookRelatedCategory.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
 
     @Override
     public void setRelatedBooksAuthor(List<BookModel> models) {
-        ViewPagerBooksAdapter adapter = new ViewPagerBooksAdapter(
-                getFiveItems(models),
-                getContext(),
+        BookPagerAdapter adapter = new BookPagerAdapter(getContext(), getFiveItems(models),
                 this);
+        viewPagerBookRelatedAuthor.setHasFixedSize(true);
+        viewPagerBookRelatedAuthor.setItemAnimator(new DefaultItemAnimator());
+        viewPagerBookRelatedAuthor.setLayoutManager(new LinearLayoutManager(
+                getContext(), LinearLayoutManager.HORIZONTAL,false
+        ));
         viewPagerBookRelatedAuthor.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
