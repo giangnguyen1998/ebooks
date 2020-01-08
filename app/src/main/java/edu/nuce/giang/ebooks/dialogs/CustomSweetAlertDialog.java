@@ -45,37 +45,37 @@ public class CustomSweetAlertDialog {
         pDialog.show();
     }
 
-    public void showCustomDialog(String mTitle, String mDescription) {
-        @SuppressLint("InflateParams") View view = LayoutInflater.from(context).inflate(
-                R.layout.fragment_ebooks_top_chat,
-                null
-        );
-
-        TextView title = view.findViewById(R.id.tv_title);
-        TextView description = view.findViewById(R.id.tv_description);
-        final Button buttonCancel = view.findViewById(R.id.btn_cancel);
-        final Button buttonAllow = view.findViewById(R.id.btn_allow);
-
-        title.setText(mTitle);
-        description.setText(mDescription);
-
-        AlertDialog.Builder alert = new AlertDialog.Builder(context);
-        alert.setView(view);
-        alert.setCancelable(false);
-
-        AlertDialog dialog = alert.create();
-        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.show();
-
-        buttonAllow.setOnClickListener(v -> {
-        });
-
-        buttonCancel.setOnClickListener(v -> {
-            if (dialog.isShowing()) {
-                dialog.dismiss();
-            }
-        });
-    }
+//    public void showCustomDialog(String mTitle, String mDescription) {
+//        @SuppressLint("InflateParams") View view = LayoutInflater.from(context).inflate(
+//                R.layout.fragment_ebooks_top_chat,
+//                null
+//        );
+//
+//        TextView title = view.findViewById(R.id.tv_title);
+//        TextView description = view.findViewById(R.id.tv_description);
+//        final Button buttonCancel = view.findViewById(R.id.btn_cancel);
+//        final Button buttonAllow = view.findViewById(R.id.btn_allow);
+//
+//        title.setText(mTitle);
+//        description.setText(mDescription);
+//
+//        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+//        alert.setView(view);
+//        alert.setCancelable(false);
+//
+//        AlertDialog dialog = alert.create();
+//        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//        dialog.show();
+//
+//        buttonAllow.setOnClickListener(v -> {
+//        });
+//
+//        buttonCancel.setOnClickListener(v -> {
+//            if (dialog.isShowing()) {
+//                dialog.dismiss();
+//            }
+//        });
+//    }
 
 }
 

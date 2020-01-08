@@ -9,7 +9,6 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:transitionName="sharedBookModelTran"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:background="@color/white"
@@ -17,6 +16,7 @@
             android:orientation="vertical">
 
             <ImageView
+                android:transitionName="sharedBookModelTran"
                 android:id="@+id/item_book_image"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"

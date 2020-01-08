@@ -22,9 +22,8 @@
             android:name=".activities.CocoBooksHomeActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".activities.CocoBooksHome1Activity" />
-        <activity
-            android:name=".activities.home.EBookHome2Activity"
-            android:theme="@style/MaterialTransitionsTheme" />
+        <activity android:name=".activities.home.EBookHome2Activity"
+            android:theme="@style/MaterialTransitionsTheme"/>
         <activity android:name=".activities.CocoBookGerneActivity" />
         <activity android:name=".activities.library.EBookLibraryActivity" />
         <activity

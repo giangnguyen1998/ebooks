@@ -64,6 +64,7 @@ dependencies {
     implementation 'com.github.smarteist:autoimageslider:1.3.2-appcompat'
     //bottom dialog
     implementation 'me.shaohui:bottomdialog:1.1.9'
+//    implementation 'com.github.dmytrodanylyk.shadow-layout:library:1.0.3'
     //end
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
