@@ -38,6 +38,17 @@ public class BookModel implements Serializable {
     @SerializedName("publisher")
     @Expose
     private String publisher;
+    @SerializedName("score")
+    @Expose
+    private Float score;
+
+    public Float getScore() {
+        return score;
+    }
+
+    public void setScore(Float score) {
+        this.score = score;
+    }
 
     public String getCategoryName() {
         return categoryName;

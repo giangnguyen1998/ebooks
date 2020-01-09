@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
@@ -45,6 +46,10 @@ public class BooksListAdapter extends RecyclerView.Adapter<BooksListAdapter.MyVi
         MyTextView_Roboto_Regular itemBookListAuthor;
         @BindView(R.id.like_book)
         ImageView likeBook;
+        @BindView(R.id.item_bookList_rating)
+        RatingBar itemBookRating;
+        @BindView(R.id.item_bookList_score)
+        MyTextView_Roboto_Regular itemScore;
 
         public MyViewHolder(View view) {
             super(view);
@@ -86,6 +91,8 @@ public class BooksListAdapter extends RecyclerView.Adapter<BooksListAdapter.MyVi
 
         holder.itemBookListName.setText(books.get(i).getName());
         holder.itemBookListAuthor.setText(books.get(i).getAuthorName());
+        holder.itemBookRating.setRating(books.get(i).getScore());
+        holder.itemScore.setText(String.valueOf(books.get(i).getScore()));
         holder.likeBook.setOnClickListener(v -> {
             try {
                 LibraryModel model = Utils.getDataBaseUtilsInstance(context)

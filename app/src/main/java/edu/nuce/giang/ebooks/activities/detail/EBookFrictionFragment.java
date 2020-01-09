@@ -24,6 +24,8 @@ import butterknife.ButterKnife;
 import edu.nuce.giang.ebooks.R;
 import edu.nuce.giang.ebooks.Utils;
 import edu.nuce.giang.ebooks.activities.author.EBookAuthorActivity;
+import edu.nuce.giang.ebooks.activities.books.EBookListActivity;
+import edu.nuce.giang.ebooks.activities.category.EBookCatagoriesActivity;
 import edu.nuce.giang.ebooks.adapters.BookItemClickListener;
 import edu.nuce.giang.ebooks.adapters.BookPagerAdapter;
 import edu.nuce.giang.ebooks.adapters.ViewPagerBooksAdapter;
@@ -47,6 +49,10 @@ public class EBookFrictionFragment extends Fragment implements BookView, BookIte
     RecyclerView viewPagerBookRelatedAuthor;
     @BindView(R.id.relatedBookAuthor)
     MyTextView_Roboto_Medium relatedBookAuthor;
+    @BindView(R.id.showRelatedBookAuthor)
+    MyTextView_Roboto_Medium showRelatedBookAuthor;
+    @BindView(R.id.showRelatedBookCategory)
+    MyTextView_Roboto_Medium showRelatedBookCategory;
 
     @Nullable
     @Override
@@ -73,6 +79,18 @@ public class EBookFrictionFragment extends Fragment implements BookView, BookIte
             relatedBookAuthor.setText("Books By " + authorName);
             presenter.getBooksRelatedCategory(categoryId);
             presenter.getBooksRelatedAuthor(authorId);
+
+            showRelatedBookAuthor.setOnClickListener(v -> {
+                Intent nIntent = new Intent(getContext(), EBookListActivity.class);
+                nIntent.putExtra("nameAuthor", authorName);
+                nIntent.putExtra("authorId", authorId);
+                startActivity(nIntent);
+            });
+            showRelatedBookCategory.setOnClickListener(v -> {
+                Intent nIntent = new Intent(getContext(), EBookCatagoriesActivity.class);
+                nIntent.putExtra("categoryId", categoryId);
+                startActivity(nIntent);
+            });
         }
     }
 
@@ -106,7 +124,7 @@ public class EBookFrictionFragment extends Fragment implements BookView, BookIte
         viewPagerBookRelatedCategory.setHasFixedSize(true);
         viewPagerBookRelatedCategory.setItemAnimator(new DefaultItemAnimator());
         viewPagerBookRelatedCategory.setLayoutManager(new LinearLayoutManager(
-                getContext(), LinearLayoutManager.HORIZONTAL,false
+                getContext(), LinearLayoutManager.HORIZONTAL, false
         ));
         viewPagerBookRelatedCategory.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -119,7 +137,7 @@ public class EBookFrictionFragment extends Fragment implements BookView, BookIte
         viewPagerBookRelatedAuthor.setHasFixedSize(true);
         viewPagerBookRelatedAuthor.setItemAnimator(new DefaultItemAnimator());
         viewPagerBookRelatedAuthor.setLayoutManager(new LinearLayoutManager(
-                getContext(), LinearLayoutManager.HORIZONTAL,false
+                getContext(), LinearLayoutManager.HORIZONTAL, false
         ));
         viewPagerBookRelatedAuthor.setAdapter(adapter);
         adapter.notifyDataSetChanged();

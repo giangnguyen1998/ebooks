@@ -51,6 +51,8 @@ public class EBookFictionActivity extends AppCompatActivity implements BookView,
     ImageView onBack;
     @BindView(R.id.btnBooksMark)
     ImageButton btnBooksMark;
+    @BindView(R.id.book_rating)
+    MyTextView_Roboto_Regular bookRating;
 
     BookPresenter presenter;
 
@@ -184,6 +186,7 @@ public class EBookFictionActivity extends AppCompatActivity implements BookView,
                 .into(bookImage);
         bookName.setText(model.getName());
         bookPublisher.setText(model.getPublisher());
+        bookRating.setText(String.valueOf(model.getScore()));
     }
 
     @Override

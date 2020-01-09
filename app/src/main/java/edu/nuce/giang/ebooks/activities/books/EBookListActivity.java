@@ -55,10 +55,16 @@ public class EBookListActivity extends AppCompatActivity implements BookView {
         ButterKnife.bind(this);
 
         BookPresenter presenter = new IBookPresenter(this);
-        presenter.getListData();
-
         onBack.setVisibility(View.VISIBLE);
-        toolbarTitle.setText("ALL BOOKS");
+        Intent nIntent = getIntent();
+        if (nIntent != null && nIntent.getStringExtra("nameAuthor") != null
+                && nIntent.getIntExtra("authorId",0) != 0) {
+            toolbarTitle.setText("BOOKS OF " + nIntent.getStringExtra("nameAuthor").toUpperCase());
+            presenter.getBooksRelatedAuthor(nIntent.getIntExtra("authorId",0));
+        } else {
+            toolbarTitle.setText("ALL BOOKS");
+            presenter.getListData();
+        }
 
         textFilter.setOnClickListener(v -> {
             Intent intent = new Intent(EBookListActivity.this, EBookFilterActivity.class);
@@ -125,6 +131,20 @@ public class EBookListActivity extends AppCompatActivity implements BookView {
 
     @Override
     public void setRelatedBooksAuthor(List<BookModel> models) {
+        BooksListAdapter adapter = new BooksListAdapter(this, models);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this,
+                LinearLayoutManager.VERTICAL,
+                false));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setNestedScrollingEnabled(true);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
+        adapter.setClickListener((view, model) -> {
+            Intent intent = new Intent(EBookListActivity.this, EBookFictionActivity.class);
+            intent.putExtra("book", model);
+            startActivity(intent);
+        });
     }
 }

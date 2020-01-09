@@ -31,6 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import edu.nuce.giang.ebooks.R;
 import edu.nuce.giang.ebooks.Utils;
+import edu.nuce.giang.ebooks.activities.books.EBookListActivity;
 import edu.nuce.giang.ebooks.adapters.BookItemClickListener;
 import edu.nuce.giang.ebooks.adapters.BookPagerAdapter;
 import edu.nuce.giang.ebooks.adapters.ViewPagerBooksAdapter;
@@ -66,6 +67,8 @@ public class EBookAuthorActivity extends AppCompatActivity implements EBookAutho
     ShimmerFrameLayout shimmerFrameLayout;
     @BindView(R.id.pagerBooksAuthor)
     RecyclerView pagerBooks;
+    @BindView(R.id.showAll)
+    MyTextView_Roboto_Medium showAll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,6 +157,13 @@ public class EBookAuthorActivity extends AppCompatActivity implements EBookAutho
         authorName.setText(author.getAuthorName());
         authorBooks.setText(bookCount);
         expandedAuthorDescription.setText(author.getAuthorDes());
+
+        showAll.setOnClickListener(v -> {
+            Intent nIntent = new Intent(EBookAuthorActivity.this, EBookListActivity.class);
+            nIntent.putExtra("nameAuthor", author.getAuthorName());
+            nIntent.putExtra("authorId", author.getAuthorId());
+            startActivity(nIntent);
+        });
     }
 
     @Override
@@ -163,7 +173,7 @@ public class EBookAuthorActivity extends AppCompatActivity implements EBookAutho
         pagerBooks.setHasFixedSize(true);
         pagerBooks.setItemAnimator(new DefaultItemAnimator());
         pagerBooks.setLayoutManager(new LinearLayoutManager(
-                EBookAuthorActivity.this, LinearLayoutManager.HORIZONTAL,false
+                EBookAuthorActivity.this, LinearLayoutManager.HORIZONTAL, false
         ));
         pagerBooks.setAdapter(adapter);
         adapter.notifyDataSetChanged();
