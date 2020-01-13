@@ -1,7 +1,9 @@
 package edu.nuce.giang.ebooks.activities.books;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -46,7 +48,10 @@ public class EBookListActivity extends AppCompatActivity implements BookView {
     ImageView onBack;
     @BindView(R.id.toolbar_title)
     MyTextView_Roboto_Medium toolbarTitle;
+    @BindView(R.id.swipeRefreshBooks)
+    SwipeRefreshLayout swipeRefreshBooks;
 
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,14 +62,14 @@ public class EBookListActivity extends AppCompatActivity implements BookView {
         BookPresenter presenter = new IBookPresenter(this);
         onBack.setVisibility(View.VISIBLE);
         Intent nIntent = getIntent();
-        if (nIntent != null && nIntent.getStringExtra("nameAuthor") != null
-                && nIntent.getIntExtra("authorId",0) != 0) {
-            toolbarTitle.setText("BOOKS OF " + nIntent.getStringExtra("nameAuthor").toUpperCase());
-            presenter.getBooksRelatedAuthor(nIntent.getIntExtra("authorId",0));
-        } else {
-            toolbarTitle.setText("ALL BOOKS");
-            presenter.getListData();
-        }
+        getData(nIntent, presenter);
+
+        //refresh data
+        swipeRefreshBooks.setColorSchemeColors(R.color.colorPrimary);
+        swipeRefreshBooks.setOnRefreshListener(() -> {
+            getData(nIntent, presenter);
+            swipeRefreshBooks.setRefreshing(false);
+        });
 
         textFilter.setOnClickListener(v -> {
             Intent intent = new Intent(EBookListActivity.this, EBookFilterActivity.class);
@@ -72,6 +77,17 @@ public class EBookListActivity extends AppCompatActivity implements BookView {
                     toolbar, "filterBook");
             startActivity(intent, options.toBundle());
         });
+    }
+
+    private void getData(Intent nIntent, BookPresenter presenter) {
+        if (nIntent != null && nIntent.getStringExtra("nameAuthor") != null
+                && nIntent.getIntExtra("authorId", 0) != 0) {
+            toolbarTitle.setText("BOOKS OF " + nIntent.getStringExtra("nameAuthor").toUpperCase());
+            presenter.getBooksRelatedAuthor(nIntent.getIntExtra("authorId", 0));
+        } else {
+            toolbarTitle.setText("ALL BOOKS");
+            presenter.getListData();
+        }
     }
 
     @OnClick(R.id.ic_back)

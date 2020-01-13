@@ -1,168 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:id="@+id/swipeRefreshDetail"
     tools:context=".activities.detail.EBookFictionActivity">
-
-    <include layout="@layout/toolbar2" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <include layout="@layout/toolbar2" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/toolbarColor"
-            android:elevation="5dp"
-            android:orientation="horizontal"
-            android:paddingTop="10dp"
-            android:paddingBottom="17.8dp">
+            android:orientation="vertical">
 
-            <android.support.v7.widget.CardView
-                android:layout_width="100dp"
-                android:layout_height="160dp"
-                android:layout_marginLeft="20dp"
-                android:background="@color/white"
-                app:cardCornerRadius="1.5dp">
-
-                <ImageView
-                    android:id="@+id/book_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/dutch"
-                    android:transitionName="sharedBookModelTran" />
-            </android.support.v7.widget.CardView>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="23dp"
-                android:layout_marginRight="20dp"
-                android:orientation="vertical">
-
-                <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Medium
-                    android:id="@+id/book_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="40dp"
-                    android:ellipsize="end"
-                    android:text="..."
-                    android:textColor="@color/white"
-                    android:textSize="15.7dp" />
-
-                <LinearLayout
-                    android:id="@+id/layoutScore"
-                    android:layout_below="@id/book_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6.7dp"
-                    android:orientation="horizontal">
-
-                    <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Regular
-                        android:id="@+id/book_rating"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:text=".."
-                        android:textColor="@color/white"
-                        android:textSize="12sp" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="3dp"
-                        android:src="@drawable/star" />
-
-                </LinearLayout>
-
-                <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Regular
-                    android:id="@+id/book_publisher"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_above="@id/layout_action"
-                    android:layout_below="@id/layoutScore"
-                    android:layout_marginTop="3dp"
-                    android:ellipsize="end"
-                    android:text="..."
-                    android:textColor="@color/white" />
-
-                <LinearLayout
-                    android:id="@+id/layout_action"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_gravity="bottom"
-                    android:layout_marginRight="60dp"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/book_read"
-                        android:layout_width="0dp"
-                        android:layout_height="35dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_button_read"
-                        android:text="Read"
-                        android:textColor="@color/white"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
-                    <ImageButton
-                        android:id="@+id/btnBooksMark"
-                        android:layout_width="0dp"
-                        android:layout_height="35dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_button_continue"
-                        android:src="@drawable/ic_bookmark_black_24dp"
-                        android:textColor="@color/white"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-            </RelativeLayout>
-        </LinearLayout>
-
-        <edu.nuce.giang.ebooks.customfonts.CustomTabLayout
-            android:id="@+id/tab"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/toolbarColor"
-            android:elevation="5dp"
-            app:tabGravity="fill"
-            app:tabIndicatorColor="@color/white"
-            app:tabIndicatorHeight="4.3dp"
-            app:tabMode="fixed"
-            app:tabPaddingEnd="20dp"
-            app:tabPaddingStart="20dp"
-            app:tabSelectedTextColor="@color/white"
-            app:tabTextColor="@color/white" />
-
-        <android.support.v4.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fillViewport="true"
-            android:scrollbars="none">
-
-            <edu.nuce.giang.ebooks.activities.WrapContentHeightViewPager
-                android:id="@+id/vp"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0dp" />
+                android:background="@color/toolbarColor"
+                android:elevation="5dp"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingBottom="17.8dp">
 
-        </android.support.v4.widget.NestedScrollView>
+                <android.support.v7.widget.CardView
+                    android:layout_width="100dp"
+                    android:layout_height="160dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@color/white"
+                    app:cardCornerRadius="1.5dp">
+
+                    <ImageView
+                        android:id="@+id/book_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/dutch"
+                        android:transitionName="sharedBookModelTran" />
+                </android.support.v7.widget.CardView>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="20dp"
+                    android:orientation="vertical">
+
+                    <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Medium
+                        android:id="@+id/book_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="40dp"
+                        android:ellipsize="end"
+                        android:text="..."
+                        android:textColor="@color/white"
+                        android:textSize="15.7dp" />
+
+                    <LinearLayout
+                        android:id="@+id/layoutScore"
+                        android:layout_below="@id/book_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6.7dp"
+                        android:orientation="horizontal">
+
+                        <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Regular
+                            android:id="@+id/book_rating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:text=".."
+                            android:textColor="@color/white"
+                            android:textSize="12sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="3dp"
+                            android:src="@drawable/star" />
+
+                    </LinearLayout>
+
+                    <edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Regular
+                        android:id="@+id/book_publisher"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@id/layout_action"
+                        android:layout_below="@id/layoutScore"
+                        android:layout_marginTop="3dp"
+                        android:ellipsize="end"
+                        android:text="..."
+                        android:textColor="@color/white" />
+
+                    <LinearLayout
+                        android:id="@+id/layout_action"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginRight="60dp"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/book_read"
+                            android:layout_width="0dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_button_read"
+                            android:text="Read"
+                            android:textColor="@color/white"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <ImageButton
+                            android:id="@+id/btnBooksMark"
+                            android:layout_width="0dp"
+                            android:layout_height="35dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_button_continue"
+                            android:src="@drawable/ic_bookmark_black_24dp"
+                            android:textColor="@color/white"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <edu.nuce.giang.ebooks.customfonts.CustomTabLayout
+                android:id="@+id/tab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/toolbarColor"
+                android:elevation="5dp"
+                app:tabGravity="fill"
+                app:tabIndicatorColor="@color/white"
+                app:tabIndicatorHeight="4.3dp"
+                app:tabMode="fixed"
+                app:tabPaddingEnd="20dp"
+                app:tabPaddingStart="20dp"
+                app:tabSelectedTextColor="@color/white"
+                app:tabTextColor="@color/white" />
+
+            <android.support.v4.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fillViewport="true"
+                android:scrollbars="none">
+
+                <edu.nuce.giang.ebooks.activities.WrapContentHeightViewPager
+                    android:id="@+id/vp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp" />
+
+            </android.support.v4.widget.NestedScrollView>
+
+        </LinearLayout>
 
     </LinearLayout>
-</LinearLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/swipeRefreshCollection"
     android:background="@color/colorBackground">
 
-    <android.support.v4.widget.NestedScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerViewCollections"
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="none"/>
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
-    </android.support.v4.widget.NestedScrollView>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViewCollections"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"/>
 
-    <include
-        android:id="@+id/shimmerCollections"
-        layout="@layout/shimmer_collections" />
+        </android.support.v4.widget.NestedScrollView>
 
-</RelativeLayout>
+        <include
+            android:id="@+id/shimmerCollections"
+            layout="@layout/shimmer_collections" />
+
+    </RelativeLayout>
+
+</android.support.v4.widget.SwipeRefreshLayout>

@@ -1,11 +1,13 @@
 package edu.nuce.giang.ebooks.activities.home;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -38,6 +40,8 @@ public class EBookCollectionFragment extends Fragment implements CollectionView,
     RecyclerView recyclerViewCollections;
     @BindView(R.id.shimmerCollections)
     ShimmerFrameLayout shimmerCollections;
+    @BindView(R.id.swipeRefreshCollection)
+    SwipeRefreshLayout swipeRefreshCollection;
 
     @Nullable
     @Override
@@ -57,12 +61,20 @@ public class EBookCollectionFragment extends Fragment implements CollectionView,
         return view;
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         CollectionPresenter presenter = new ICollectionPresenter(this);
         presenter.getListData();
+
+        //refresh data
+        swipeRefreshCollection.setColorSchemeColors(R.color.colorPrimary);
+        swipeRefreshCollection.setOnRefreshListener(()->{
+            presenter.getListData();
+            swipeRefreshCollection.setRefreshing(false);
+        });
     }
 
     @Override

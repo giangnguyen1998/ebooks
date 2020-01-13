@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import edu.nuce.giang.ebooks.R;
-import edu.nuce.giang.ebooks.activities.home.EBookHome2Activity;
 import edu.nuce.giang.ebooks.adapters.GridViewAdapter;
 
 public class PhotosActivity extends AppCompatActivity {

@@ -9,9 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import com.google.gson.Gson;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,7 +20,7 @@ import edu.nuce.giang.ebooks.base.SharedPrefs;
 import edu.nuce.giang.ebooks.dialogs.CustomSweetAlertDialog;
 import edu.nuce.giang.ebooks.models.CheckLoginModel;
 
-public class EBookHome2Activity extends AppCompatActivity implements FictionTabAdapterSelected {
+public class EBookHomeActivity extends AppCompatActivity implements FictionTabAdapterSelected {
 
     @BindView(R.id.tab)
     TabLayout tabLayout;
@@ -37,7 +34,7 @@ public class EBookHome2Activity extends AppCompatActivity implements FictionTabA
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ebooks_home2);
+        setContentView(R.layout.activity_ebooks_home);
 
         ButterKnife.bind(this);
 
@@ -51,8 +48,8 @@ public class EBookHome2Activity extends AppCompatActivity implements FictionTabA
         setUpViewPager();
 
         textFilter.setOnClickListener(v -> {
-            Intent intent = new Intent(EBookHome2Activity.this, EBookFilterActivity.class);
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(EBookHome2Activity.this,
+            Intent intent = new Intent(EBookHomeActivity.this, EBookFilterActivity.class);
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(EBookHomeActivity.this,
                     toolbar, "filterBook");
             startActivity(intent, options.toBundle());
         });
@@ -75,7 +72,7 @@ public class EBookHome2Activity extends AppCompatActivity implements FictionTabA
         String status = getIntent().getStringExtra("status");
         if (status != null && !status.equals("")) {
             viewPager.setCurrentItem(3);
-            new CustomSweetAlertDialog(EBookHome2Activity.this)
+            new CustomSweetAlertDialog(EBookHomeActivity.this)
                     .alertDialogSuccess("Successfully!", status);
         }
 

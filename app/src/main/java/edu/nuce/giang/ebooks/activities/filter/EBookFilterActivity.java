@@ -17,6 +17,8 @@ import android.widget.EditText;
 import com.github.ybq.android.spinkit.SpinKitView;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -75,16 +77,34 @@ public class EBookFilterActivity extends AppCompatActivity implements BookView {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                final Runnable setResultsRunnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        if (s.toString().equals("")) {
+                            presenter.getFilterResultsBooks("$");
+                        } else {
+                            presenter.getFilterResultsBooks(s.toString());
+                        }
+                    }
+                };
 
+                TimerTask task = new TimerTask(){
+                    public void run() {
+                        EBookFilterActivity.this.runOnUiThread(setResultsRunnable);
+                    }
+                };
+
+                Timer timer = new Timer();
+                timer.schedule(task, 300);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString().equals("")) {
-                    presenter.getFilterResultsBooks("$");
-                } else {
-                    presenter.getFilterResultsBooks(s.toString());
-                }
+//                if (s.toString().equals("")) {
+//                    presenter.getFilterResultsBooks("$");
+//                } else {
+//                    presenter.getFilterResultsBooks(s.toString());
+//                }
             }
         });
     }

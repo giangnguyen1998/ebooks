@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="13.5dp"
                 android:lineSpacingExtra="2.7sp"
-                android:text="COCO BOOKS"
+                android:text="RIVER PINK"
                 android:textColor="@color/white"
                 android:textSize="16.7sp" />
 

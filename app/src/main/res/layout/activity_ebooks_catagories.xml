@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/htab_maincontent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
-    android:fitsSystemWindows="true">
+    android:background="@color/colorBackground">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+
+    </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/htab_appbar"
@@ -137,30 +143,37 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.widget.NestedScrollView
+    <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fillViewport="true"
-        android:scrollbars="none"
+        android:id="@+id/swipeRefreshCategory"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <RelativeLayout
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            android:scrollbars="none">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerBookCategories"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:scrollbars="none" />
+                android:layout_height="wrap_content">
 
-            <include
-                android:id="@+id/shimmer_books_categories"
-                layout="@layout/shimmer_books_list" />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerBookCategories"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:scrollbars="none" />
 
-        </RelativeLayout>
+                <include
+                    android:id="@+id/shimmer_books_categories"
+                    layout="@layout/shimmer_books_list" />
 
-    </android.support.v4.widget.NestedScrollView>
+            </RelativeLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -1,14 +1,16 @@
 package edu.nuce.giang.ebooks.activities.detail;
 
 import android.app.ProgressDialog;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +22,15 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import edu.nuce.giang.ebooks.R;
-import edu.nuce.giang.ebooks.Utils;
 import edu.nuce.giang.ebooks.adapters.CommentsBookAdapter;
 import edu.nuce.giang.ebooks.base.SharedPrefs;
 import edu.nuce.giang.ebooks.customfonts.MyTextView_Roboto_Regular;
@@ -83,12 +88,22 @@ public class EBookReviewFragment extends Fragment implements CommentView, Commen
             int bookId = getArguments().getInt("id");
             presenter.getCommentsOfBook(bookId);
             sendComment.setOnClickListener(v -> {
-                CommentModel model = new CommentModel();
-                model.setBookId(bookId);
-                model.setUserId((new SharedPrefs(getContext()).getModel().getUser().getUserId()));
-                model.setContent(userComment.getText().toString());
-                model.setScore(Float.valueOf((float) seekBar.getProgress() / 10));
-                presenter.saveComment(model);
+                if (userComment.getText().length() < 10) {
+                    userComment.setError("Bình luận tối thiểu phải có 10 ký tự!");
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            userComment.setError(null);
+                        }
+                    }, 2000);
+                } else {
+                    CommentModel model = new CommentModel();
+                    model.setBookId(bookId);
+                    model.setUserId((new SharedPrefs(getContext()).getModel().getUser().getUserId()));
+                    model.setContent(userComment.getText().toString());
+                    model.setScore(Float.valueOf((float) seekBar.getProgress() / 10));
+                    presenter.saveComment(model);
+                }
             });
         }
 
@@ -122,9 +137,11 @@ public class EBookReviewFragment extends Fragment implements CommentView, Commen
         progressBar.setVisibility(View.GONE);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void setListComments(List<CommentModel> models) {
-        CommentsBookAdapter adapter = new CommentsBookAdapter(getContext(), models);
+        CommentsBookAdapter adapter = new CommentsBookAdapter(getContext(),
+                convertCreatedDateOfComments(models));
         recyclerComments.setHasFixedSize(true);
         recyclerComments.setLayoutManager(new LinearLayoutManager(
                 getContext(), LinearLayoutManager.VERTICAL, false
@@ -143,6 +160,22 @@ public class EBookReviewFragment extends Fragment implements CommentView, Commen
     public void onErrorLoading(String error) {
         new CustomSweetAlertDialog(getContext())
                 .alertDialogError("Error!", error);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private List<CommentModel> convertCreatedDateOfComments(List<CommentModel> models) {
+        for (CommentModel model : models) {
+            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern(
+                    "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+                    Locale.ENGLISH);
+            DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern(
+                    "dd-MM-yyyy",
+                    Locale.ENGLISH);
+            LocalDate date = LocalDate.parse(model.getCreateddate(), inputFormatter);
+            String formattedDate = outputFormatter.format(date);
+            model.setCreateddate(formattedDate);
+        }
+        return models;
     }
 
     private float computeRating(List<CommentModel> models) {

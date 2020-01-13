@@ -16,7 +16,7 @@ import java.io.File;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import edu.nuce.giang.ebooks.R;
-import edu.nuce.giang.ebooks.activities.home.EBookHome2Activity;
+import edu.nuce.giang.ebooks.activities.home.EBookHomeActivity;
 import edu.nuce.giang.ebooks.base.SharedPrefs;
 import edu.nuce.giang.ebooks.models.CheckLoginModel;
 import edu.nuce.giang.ebooks.presenters.UserPresenter;
@@ -86,7 +86,7 @@ public class AvatarActivity extends AppCompatActivity implements UserImageView {
     }
 
     private void changeActivity(String res) {
-        Intent intent = new Intent(getApplicationContext(), EBookHome2Activity.class);
+        Intent intent = new Intent(getApplicationContext(), EBookHomeActivity.class);
         intent.putExtra("status", res);
         startActivity(intent);
     }
@@ -94,7 +94,7 @@ public class AvatarActivity extends AppCompatActivity implements UserImageView {
     @Override
     public void setAvatar(CheckLoginModel model) {
         if (model != null) {
-            Intent intent = new Intent(getApplicationContext(), EBookHome2Activity.class);
+            Intent intent = new Intent(getApplicationContext(), EBookHomeActivity.class);
             intent.putExtra("status","Thành công!");
             intent.putExtra("user", model);
             startActivity(intent);

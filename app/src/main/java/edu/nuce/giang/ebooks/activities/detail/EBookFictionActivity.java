@@ -1,8 +1,10 @@
 package edu.nuce.giang.ebooks.activities.detail;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -53,9 +55,12 @@ public class EBookFictionActivity extends AppCompatActivity implements BookView,
     ImageButton btnBooksMark;
     @BindView(R.id.book_rating)
     MyTextView_Roboto_Regular bookRating;
+    @BindView(R.id.swipeRefreshDetail)
+    SwipeRefreshLayout swipeRefreshDetail;
 
     BookPresenter presenter;
 
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +77,15 @@ public class EBookFictionActivity extends AppCompatActivity implements BookView,
         if (model.getId() != null) {
             presenter.getData(model.getId());
         }
+
+        //refresh data
+        swipeRefreshDetail.setColorSchemeColors(R.color.colorPrimary);
+        swipeRefreshDetail.setOnRefreshListener(() -> {
+            if (model.getId() != null) {
+                presenter.getData(model.getId());
+            }
+            swipeRefreshDetail.setRefreshing(false);
+        });
 
         bookRead.setOnClickListener(v -> {
             Intent intent1 = new Intent(EBookFictionActivity.this,

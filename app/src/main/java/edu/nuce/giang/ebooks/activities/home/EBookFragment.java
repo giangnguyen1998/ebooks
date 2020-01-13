@@ -1,5 +1,6 @@
 package edu.nuce.giang.ebooks.activities.home;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +24,7 @@ import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -65,6 +68,8 @@ public class EBookFragment extends Fragment implements BookView, BookItemClickLi
     RecyclerView recyclerAuthors;
     @BindView(R.id.shimmerAuthors)
     ShimmerFrameLayout shimmerAuthors;
+    @BindView(R.id.swipeRefreshHome)
+    SwipeRefreshLayout swipeRefreshHome;
 
     @Nullable
     @Override
@@ -78,6 +83,7 @@ public class EBookFragment extends Fragment implements BookView, BookItemClickLi
         return view;
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -90,6 +96,15 @@ public class EBookFragment extends Fragment implements BookView, BookItemClickLi
         presenterScore.getBooksHighScore();
         AuthorPresenter presenterAuthor = new IAuthorPresenter(this);
         presenterAuthor.getTopAuthors();
+
+        //refresh data
+        swipeRefreshHome.setColorSchemeColors(R.color.colorPrimary);
+        swipeRefreshHome.setOnRefreshListener(() -> {
+            presenterBook.getListData();
+            presenterScore.getBooksHighScore();
+            presenterAuthor.getTopAuthors();
+            swipeRefreshHome.setRefreshing(false);
+        });
     }
 
     private void setUpSliderBannerImage() {
@@ -104,7 +119,7 @@ public class EBookFragment extends Fragment implements BookView, BookItemClickLi
         viewPagerBook.setHasFixedSize(true);
         viewPagerBook.setItemAnimator(new DefaultItemAnimator());
         viewPagerBook.setLayoutManager(new LinearLayoutManager(
-                getContext(), LinearLayoutManager.HORIZONTAL,false
+                getContext(), LinearLayoutManager.HORIZONTAL, false
         ));
         viewPagerBook.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -130,7 +145,11 @@ public class EBookFragment extends Fragment implements BookView, BookItemClickLi
         List<BookModel> items = new ArrayList<>();
         if (books.size() >= 5) {
             for (int i = 0; i < 5; i++) {
-                items.add(books.get(i));
+                Random rand = new Random();
+                int id = rand.nextInt(books.size());
+                if (!items.contains(books.get(id))) {
+                    items.add(books.get(id));
+                }
             }
             return items;
         }
@@ -158,7 +177,7 @@ public class EBookFragment extends Fragment implements BookView, BookItemClickLi
         viewPagerScore.setHasFixedSize(true);
         viewPagerScore.setItemAnimator(new DefaultItemAnimator());
         viewPagerScore.setLayoutManager(new LinearLayoutManager(
-                getContext(), LinearLayoutManager.HORIZONTAL,false
+                getContext(), LinearLayoutManager.HORIZONTAL, false
         ));
         viewPagerScore.setAdapter(adapter);
         adapter.notifyDataSetChanged();

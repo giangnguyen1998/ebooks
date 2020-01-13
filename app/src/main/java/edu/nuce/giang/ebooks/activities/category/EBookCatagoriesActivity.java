@@ -2,11 +2,13 @@ package edu.nuce.giang.ebooks.activities.category;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.ViewCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -54,9 +56,12 @@ public class EBookCatagoriesActivity extends AppCompatActivity implements
     ImageView backPre;
     @BindView(R.id.edittext)
     EditText_Roboto_Medium textFilter;
+    @BindView(R.id.swipeRefreshCategory)
+    SwipeRefreshLayout swipeRefreshCategory;
 
     private boolean isScroll = false;
 
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +79,16 @@ public class EBookCatagoriesActivity extends AppCompatActivity implements
             presenter.getBooksByCategory(categoryId);
             presenter.getCategoryByCategoryId(categoryId);
         }
+
+        //refresh data
+        swipeRefreshCategory.setColorSchemeColors(R.color.colorPrimary);
+        swipeRefreshCategory.setOnRefreshListener(() -> {
+            if (categoryId != 0) {
+                presenter.getBooksByCategory(categoryId);
+                presenter.getCategoryByCategoryId(categoryId);
+            }
+            swipeRefreshCategory.setRefreshing(false);
+        });
 
         setupActionBarIcon();
 

@@ -29,7 +29,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
         android:gravity="center"
-        android:text="DESIGN BY GIANG NGUYEN"
+        android:text="DESIGN BY RIVER PINK"
         android:textColor="#000" />
 
 </RelativeLayout>

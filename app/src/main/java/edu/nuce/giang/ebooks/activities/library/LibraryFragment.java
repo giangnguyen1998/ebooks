@@ -1,10 +1,12 @@
 package edu.nuce.giang.ebooks.activities.library;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -45,6 +47,8 @@ public class LibraryFragment extends Fragment implements BookLibraryView {
     ProgressBar progressBar;
     @BindView(R.id.nothingBook)
     TextView textView;
+    @BindView(R.id.swipeRefreshLibrary)
+    SwipeRefreshLayout swipeRefreshLibrary;
 
     private int value = 0;
     private BookPresenter presenter;
@@ -61,14 +65,20 @@ public class LibraryFragment extends Fragment implements BookLibraryView {
         return view;
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         presenter = new IBookPresenter(this);
-
         getValue(presenter);
 
+        //refresh data
+        swipeRefreshLibrary.setColorSchemeColors(R.color.colorPrimary);
+        swipeRefreshLibrary.setOnRefreshListener(() -> {
+            getValue(presenter);
+            swipeRefreshLibrary.setRefreshing(false);
+        });
     }
 
     @Override

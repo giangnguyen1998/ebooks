@@ -1,13 +1,11 @@
 package edu.nuce.giang.ebooks.activities.login;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -18,8 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import edu.nuce.giang.ebooks.R;
-import edu.nuce.giang.ebooks.Utils;
-import edu.nuce.giang.ebooks.activities.home.EBookHome2Activity;
+import edu.nuce.giang.ebooks.activities.EBookSplashActivity;
 import edu.nuce.giang.ebooks.base.SharedPrefs;
 import edu.nuce.giang.ebooks.dialogs.CustomSweetAlertDialog;
 import edu.nuce.giang.ebooks.models.CheckLoginModel;
@@ -52,8 +49,6 @@ public class EBookLoginActivity extends AppCompatActivity implements UserView, U
     EditText editPhoneNumber;
     @BindView(R.id.btnRegister)
     Button btnRegister;
-    @BindView(R.id.login)
-    CardView cardViewLogin;
 
     private SweetAlertDialog pDialog;
 
@@ -64,9 +59,6 @@ public class EBookLoginActivity extends AppCompatActivity implements UserView, U
         setContentView(R.layout.activity_ebooks_login);
 
         ButterKnife.bind(this);
-
-        cardViewLogin.setOutlineAmbientShadowColor(R.color.white);
-        cardViewLogin.setOutlineSpotShadowColor(R.color.white);
 
         SharedPrefs prefs = new SharedPrefs(this);
         CheckLoginModel model = prefs.getModel();
@@ -135,7 +127,7 @@ public class EBookLoginActivity extends AppCompatActivity implements UserView, U
     }
 
     private void changeActivity() {
-        startActivity(new Intent(EBookLoginActivity.this, EBookHome2Activity.class));
+        startActivity(new Intent(EBookLoginActivity.this, EBookSplashActivity.class));
         finish();
     }
 

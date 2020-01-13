@@ -25,6 +25,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import at.blogc.android.views.ExpandableTextView;
 import butterknife.BindView;
@@ -209,7 +210,11 @@ public class EBookAuthorActivity extends AppCompatActivity implements EBookAutho
         List<BookModel> items = new ArrayList<>();
         if (books.size() >= 5) {
             for (int i = 0; i < 5; i++) {
-                items.add(books.get(i));
+                Random rand = new Random();
+                int id = rand.nextInt(books.size());
+                if (!items.contains(books.get(id))) {
+                    items.add(books.get(id));
+                }
             }
             return items;
         }

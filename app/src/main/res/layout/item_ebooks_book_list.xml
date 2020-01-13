@@ -7,7 +7,7 @@
     android:layout_marginTop="5dp"
     android:layout_marginRight="10dp"
     android:layout_marginBottom="5dp"
-    cardview:cardElevation="1dp">
+    cardview:cardElevation="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,7 +39,7 @@
                 android:text="Color at Home: A Young House Love Coloring Book"
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
-                android:textSize="17sp" />
+                android:textSize="15sp" />
 
             <ImageView
                 android:id="@+id/like_book"
@@ -60,7 +60,7 @@
                 android:text="Vladimir Putin"
                 android:textAlignment="textStart"
                 android:textColor="@color/geryText2"
-                android:textSize="17sp" />
+                android:textSize="15sp" />
 
             <RatingBar
                 android:id="@+id/item_bookList_rating"

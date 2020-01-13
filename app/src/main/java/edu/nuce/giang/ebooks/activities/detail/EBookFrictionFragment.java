@@ -18,6 +18,7 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -98,7 +99,11 @@ public class EBookFrictionFragment extends Fragment implements BookView, BookIte
         List<BookModel> items = new ArrayList<>();
         if (books.size() >= 5) {
             for (int i = 0; i < 5; i++) {
-                items.add(books.get(i));
+                Random rand = new Random();
+                int id = rand.nextInt(books.size());
+                if (!items.contains(books.get(id))) {
+                    items.add(books.get(id));
+                }
             }
             return items;
         }

@@ -17,14 +17,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-        <activity
-            android:name=".activities.CocoBooksHomeActivity"
-            android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".activities.CocoBooksHome1Activity" />
-        <activity android:name=".activities.home.EBookHome2Activity"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m"
+        tools:ignore="AllowBackup">
+        <activity android:name=".activities.home.EBookHomeActivity"
             android:theme="@style/MaterialTransitionsTheme"/>
-        <activity android:name=".activities.CocoBookGerneActivity" />
         <activity android:name=".activities.library.EBookLibraryActivity" />
         <activity
             android:name=".activities.author.EBookAuthorActivity"
@@ -35,15 +32,12 @@
             android:name=".activities.category.EBookCatagoriesActivity"
             android:theme="@style/MyTheme" />
         <activity android:name=".activities.read.EBooksReadActivity" />
-        <activity android:name=".activities.CocoBookDetailActivity" />
-        <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.photo.StoreImageActivity" />
-        <activity android:name=".activities.SplashActivity" />
+        <activity android:name=".activities.EBookSplashActivity" />
         <activity android:name=".activities.photo.AvatarActivity" />
         <activity
             android:name=".activities.detail.EBookFictionActivity"
             android:theme="@style/MaterialTransitionsTheme" />
-        <activity android:name=".activities.CocoBookTopChartActivity" />
         <activity android:name=".activities.books.EBookListActivity" />
         <activity android:name=".activities.photo.PhotosActivity" />
         <activity android:name=".activities.filter.EBookFilterActivity" />

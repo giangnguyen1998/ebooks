@@ -1,5 +1,6 @@
 package edu.nuce.giang.ebooks.activities.home;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -58,6 +60,8 @@ public class EBookProfileFragment extends Fragment {
     RelativeLayout library;
     @BindView(R.id.sizeAllBooks)
     TextView sizeAllBooks;
+    @BindView(R.id.swipeRefreshProfile)
+    SwipeRefreshLayout swipeRefreshProfile;
 
     @Nullable
     @Override
@@ -69,30 +73,19 @@ public class EBookProfileFragment extends Fragment {
         return view;
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        SharedPrefs prefs = new SharedPrefs(getContext());
-        CheckLoginModel model = prefs.getModel();
+        setUserData();
 
-        if (model != null) {
-            Picasso.get()
-                    .load(Utils.URL + model.getUser().getImage())
-                    .placeholder(R.drawable.shadow_bottom_to_top)
-                    .into(imageUser);
-            fullNameUser.setText(model.getUser().getFullname());
-            fullName.setText(model.getUser().getFullname());
-            usernameUser.setText(model.getUser().getUsername());
-            email.setText(model.getUser().getUsername());
-            phoneNumber.setText(model.getUser().getPhone());
-            try {
-                long sizeBooksLibrary = Utils.getDataBaseUtilsInstance(getContext()).countBooks();
-                sizeAllBooks.setText(sizeBooksLibrary + " Books");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        //refresh data
+        swipeRefreshProfile.setColorSchemeColors(R.color.colorPrimary);
+        swipeRefreshProfile.setOnRefreshListener(() -> {
+            setUserData();
+            swipeRefreshProfile.setRefreshing(false);
+        });
 
         logout.setOnClickListener(v -> {
             showAlertLogout(getContext(), getActivity());
@@ -143,5 +136,28 @@ public class EBookProfileFragment extends Fragment {
                     }
                 })
                 .show();
+    }
+
+    private void setUserData() {
+        SharedPrefs prefs = new SharedPrefs(getContext());
+        CheckLoginModel model = prefs.getModel();
+
+        if (model != null) {
+            Picasso.get()
+                    .load(Utils.URL + model.getUser().getImage())
+                    .placeholder(R.drawable.shadow_bottom_to_top)
+                    .into(imageUser);
+            fullNameUser.setText(model.getUser().getFullname());
+            fullName.setText(model.getUser().getFullname());
+            usernameUser.setText(model.getUser().getUsername());
+            email.setText(model.getUser().getUsername());
+            phoneNumber.setText(model.getUser().getPhone());
+            try {
+                long sizeBooksLibrary = Utils.getDataBaseUtilsInstance(getContext()).countBooks();
+                sizeAllBooks.setText(sizeBooksLibrary + " Books");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

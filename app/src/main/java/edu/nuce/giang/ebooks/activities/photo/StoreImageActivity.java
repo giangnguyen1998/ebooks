@@ -106,8 +106,7 @@ public class StoreImageActivity extends AppCompatActivity {
 
             if (boolean_folder) {
 
-                ArrayList<String> al_path = new ArrayList<>();
-                al_path.addAll(al_images.get(int_position).getAllImagePath());
+                ArrayList<String> al_path = new ArrayList<>(al_images.get(int_position).getAllImagePath());
                 al_path.add(absolutePathOfImage);
                 al_images.get(int_position).setAllImagePath(al_path);
 

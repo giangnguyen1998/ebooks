@@ -1,11 +1,13 @@
 package edu.nuce.giang.ebooks.activities.home;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -38,6 +40,8 @@ public class EBookAuthorFragment extends Fragment implements AuthorView,
     RecyclerView recyclerAuthors;
     @BindView(R.id.shimmerAuthors)
     ShimmerFrameLayout shimmerAuthors;
+    @BindView(R.id.swipeRefreshAuthor)
+    SwipeRefreshLayout swipeRefreshAuthor;
 
     @Nullable
     @Override
@@ -55,6 +59,7 @@ public class EBookAuthorFragment extends Fragment implements AuthorView,
         return view;
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onViewCreated(@NonNull View view,
                               @Nullable Bundle savedInstanceState) {
@@ -62,6 +67,13 @@ public class EBookAuthorFragment extends Fragment implements AuthorView,
 
         AuthorPresenter presenter = new IAuthorPresenter(this);
         presenter.getListData();
+
+        //refresh data
+        swipeRefreshAuthor.setColorSchemeColors(R.color.colorPrimary);
+        swipeRefreshAuthor.setOnRefreshListener(() -> {
+            presenter.getListData();
+            swipeRefreshAuthor.setRefreshing(false);
+        });
     }
 
     @Override

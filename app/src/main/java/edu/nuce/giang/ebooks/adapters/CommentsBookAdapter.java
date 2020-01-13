@@ -52,6 +52,7 @@ public class CommentsBookAdapter extends RecyclerView.Adapter<CommentsBookAdapte
         commentViewHolder.userScore.setRating(models.get(i).getScore());
         commentViewHolder.userName.setText(models.get(i).getFullname());
         commentViewHolder.contentReview.setText(models.get(i).getContent());
+        commentViewHolder.dateTime.setText(models.get(i).getCreateddate());
     }
 
     @Override
@@ -71,6 +72,8 @@ public class CommentsBookAdapter extends RecyclerView.Adapter<CommentsBookAdapte
         TextView textScore;
         @BindView(R.id.content_review)
         MyTextView_Roboto_Regular contentReview;
+        @BindView(R.id.datetime)
+        TextView dateTime;
 
         public CommentViewHolder(@NonNull View itemView) {
             super(itemView);

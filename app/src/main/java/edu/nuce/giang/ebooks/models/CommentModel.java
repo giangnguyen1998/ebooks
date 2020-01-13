@@ -25,6 +25,17 @@ public class CommentModel implements Serializable {
     @SerializedName("image")
     @Expose
     private String image;
+    @SerializedName("createddate")
+    @Expose
+    private String createddate;
+
+    public String getCreateddate() {
+        return createddate;
+    }
+
+    public void setCreateddate(String createddate) {
+        this.createddate = createddate;
+    }
 
     public Integer getBookId() {
         return bookId;

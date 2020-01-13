@@ -13,11 +13,11 @@
             android:id="@+id/user_image"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="15dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="5dp"
             android:src="@drawable/profile3"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/guidelineLeft"
@@ -42,6 +42,17 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/datetime"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="15dp"
+            android:text="22-12-2019"
+            android:textStyle="italic"
+            app:layout_constraintLeft_toRightOf="@id/guidelineLeft"
+            app:layout_constraintTop_toBottomOf="@id/user_name" />
+
         <RatingBar
             android:id="@+id/user_score"
             style="?ratingBarStyleSmall"
@@ -51,7 +62,7 @@
             android:rating="4"
             android:theme="@style/RatingBar"
             app:layout_constraintLeft_toRightOf="@id/guidelineLeft"
-            app:layout_constraintTop_toBottomOf="@id/user_name" />
+            app:layout_constraintTop_toBottomOf="@id/datetime" />
 
         <TextView
             android:id="@+id/score_char"
@@ -76,10 +87,10 @@
             app:layout_constraintTop_toBottomOf="@id/score_char" />
 
         <View
+            style="@style/proifleDetailsView"
             app:layout_constraintLeft_toRightOf="@id/guidelineLeft"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/content_review"
-            style="@style/proifleDetailsView" />
+            app:layout_constraintTop_toBottomOf="@id/content_review" />
 
     </android.support.constraint.ConstraintLayout>
 
